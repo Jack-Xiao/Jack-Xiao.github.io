@@ -1,0 +1,870 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="google0f0bd5e5891a7105" />
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="tianyejia" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="原文地址: https://onevcat.com/2016/06/ios-10-sdk
+开发者所需要知道的 iOS 10 SDK 新特性
+总览距离 iPhone 横空出世已经过去了 9 个年头，iOS 的版本号也跨入了两位数。在我们回顾过去四五年 iOS 系统的发展的时候，不免感叹变化速度之快，迭代周期之短。iOS 7 翻天覆地的全新设计，iOS 8 中 Size Classes 的出现，应用扩">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于Swift 3的新特性">
+<meta property="og:url" content="http://tianyejia.net/2016/06/24/关于Swift-3的新特性/index.html">
+<meta property="og:site_name" content="给时光以生命">
+<meta property="og:description" content="原文地址: https://onevcat.com/2016/06/ios-10-sdk
+开发者所需要知道的 iOS 10 SDK 新特性
+总览距离 iPhone 横空出世已经过去了 9 个年头，iOS 的版本号也跨入了两位数。在我们回顾过去四五年 iOS 系统的发展的时候，不免感叹变化速度之快，迭代周期之短。iOS 7 翻天覆地的全新设计，iOS 8 中 Size Classes 的出现，应用扩">
+<meta property="og:updated_time" content="2016-08-04T08:42:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于Swift 3的新特性">
+<meta name="twitter:description" content="原文地址: https://onevcat.com/2016/06/ios-10-sdk
+开发者所需要知道的 iOS 10 SDK 新特性
+总览距离 iPhone 横空出世已经过去了 9 个年头，iOS 的版本号也跨入了两位数。在我们回顾过去四五年 iOS 系统的发展的时候，不免感叹变化速度之快，迭代周期之短。iOS 7 翻天覆地的全新设计，iOS 8 中 Size Classes 的出现，应用扩">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 关于Swift 3的新特性 | 给时光以生命 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?409539fd29780a177452384bc846716f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=55248887";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">给时光以生命</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'xGEPPerz-QLS-XKNDR_4','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                关于Swift 3的新特性
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-24T10:40:51+08:00" content="2016-06-24">
+              2016-06-24
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/24/关于Swift-3的新特性/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/24/关于Swift-3的新特性/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/06/24/关于Swift-3的新特性/" class="leancloud_visitors" data-flag-title="关于Swift 3的新特性">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>原文地址: <a href="https://onevcat.com/2016/06/ios-10-sdk" target="_blank" rel="external">https://onevcat.com/2016/06/ios-10-sdk</a></p>
+<p>开发者所需要知道的 iOS 10 SDK 新特性</p>
+<p>总览<br>距离 iPhone 横空出世已经过去了 9 个年头，iOS 的版本号也跨入了两位数。在我们回顾过去四五年 iOS 系统的发展的时候，不免感叹变化速度之快，迭代周期之短。iOS 7 翻天覆地的全新设计，iOS 8 中 Size Classes 的出现，应用扩展，以及 Cloud Kit 的加入，iOS 9 里的分屏多任务特性等等。Apple 近年都是在 WWDC 发布新的系统和软件，然后在秋季和冬季 (或者来年春季) 召开硬件产品的发布会。WWDC 上每一项软件的更新其实都预示了相应的硬件的方向，相信今年也不会例外。</p>
+<p>对于开发者来说，好消息是 iOS 10 中并没有加入太多内容。按照适配的需求，来年的 iOS 开发至少应该可以从 iOS 8 甚至 iOS 9 开始，我们将有时间对之前的版本特性进行更好的梳理，消化和实践。相比与开疆扩土，iOS 10 更专注的是对现有内容的改进，以弥补之前迅速发展所留下的一些问题，这其实正是 Apple 当下所亟需做的事情。</p>
+<p>生态整合与 Extension 开发<br>在 iOS 10 里 Apple 延续了前几年的策略，那就是进行平台整合。全世界现在没有另外一家厂商在掌握了包括桌面，移动到穿戴的一系列硬件设备的同时，还掌控了相应的从操作系统，到应用软件，再到软件商店这样一套完整的布局。Apple 显然也非常明白这个优势意味着什么。所以近年来 Apple 一直强调平台整合，如果你的应用能够同时在 iOS，watchOS 以及 macOS 上工作的话，毫无疑问将会更容易吸引用户以及 Apple 的喜爱。</p>
+<p>另外一点则是各个应用之间的整合和交互。不难发现，随着近年来 extension 开发的兴起，Apple 逐渐在从 app 是“用户体验的核心”这个理念中转移，变为用户应该也可以在通知中心，桌面挂件或者手表这样的地方完成必要交互。而应用之间的交互在以前可以说是 iOS 系统的禁区，但是去年随着 Workflow 的成功，Apple 对于应用之间的交互有助于用户生产力的提升有了清晰的认识。今年 SDK 中几个重大更新其实都是围绕这个主题来进行的。</p>
+<p>iOS 10 中，Apple 为我们添加了茫茫多 extension 的新模板，以至于在同事之间开玩笑都是我们马上就要丢掉 iOS app 开发者的工作，而转变为 iOS extension 开发者这样了。新加入的扩展的种类和数量都足以说明使用应用扩展以及进行扩展开发在今后 iOS 开发中的重要地位。如果你对扩展开发还一无所知，可以先看看这篇入门文章，里面简单介绍了关于扩展的基本概念，不同开发 target 之间代码共享的方式，以及通用的扩展开发方法等。<br><a id="more"></a></p>
+<p>SiriKit<br>Siri API 的开放自然是 iOS 10 SDK 中最激动人心也是亮眼的特性。SiriKit 为我们提供一全套从语音识别到代码处理，最后向用户展示结果的流程。Apple 加入了一套全新的框架 Intents.framework 来表示 Siri 获取并解析的结果。你的应用需要提供一些关键字表明可以接受相关输入，而 Siri 扩展只需要监听系统识别的用户意图 (intent)，作出合适的响应，修改以及实际操作，最后通过 IntentsUI.framework 提供反馈。整个过程非常清晰明了，但是这也意味着开发者所能拥有的自由度有限。</p>
+<p>在 iOS 10 中，我们只能用 SiriKit 来做六类事情，分别是：</p>
+<p>语音和视频通话<br>发送消息<br>发送或接收付款<br>搜索照片<br>约车<br>管理健身<br>如果你的应用恰好正在处理这些领域的问题的话，添加 Intents Extension 的支持会是很棒的选择。它将提高用户使用你的应用的可能性，也能让用户在其他像是地图这样的系统级应用中使用你的服务。</p>
+<p>SiriKit 笔记 (待填坑)<br>User Notifications<br>通知中心向来是 iOS 上的兵家必争之地。如何提供适时有效的通知，往往决定了用户活跃和留存的可能性。在 iOS 10 上，Apple 对通知进行了加强和革新。现在，为了更好地处理和管理通知，和本地及推送通知相关的 API 被封装到了全新的框架 UserNotifications.framework 中。在 iOS 10 中，开发者的服务器有机会在本地或者远程通知发送给用户之前再进行修改。</p>
+<p>另外，在之前加入了 notification action 以及 text input 的基础上，iOS 10 又新增了为通知添加音频，图片，甚至视频的功能。现在，你的通知不仅仅是提醒用户回到应用的入口，更成为了一个展示应用内容，向用户传递多媒体信息的窗口。</p>
+<p>User Notifications 笔记 (待填坑)<br>iMessage Apps<br>Message 应用大概是 Apple 在宣传 iOS 10 时着力最多的部分了。虽然新的贴纸包，自动转换颜文字，发送全屏效果等功能都很酷炫，但是对于程序开发者来说，可能还是对 iMessage Apps 更感兴趣。Xcode 8 中，Apple 在 iOS Application 模板中添加了一类新的项目类型，Messages Application。同时，模拟器甚至还开发了新的双人对话模式，以供开发者调试这类 app。</p>
+<p>虽然名义上是独立 app，但实际上工作的依然是一个 extension。在该扩展中，Messages.framework 将承担与系统的 message 界面交互的主要职责。你通过提供一个自定义的 View Controller，来获取用户在使用你的 message app 时进行对话的上下文，以及发送接收等操作，并做出合适的响应。这个扩展在用来进行直接在 Message 应用中一些自定义共享会很好玩。但是鉴于 Apple 暂时没有打算将 Message.app 跨平台的原因，可能也注定了这只会是一种补充，而无法成为主流。</p>
+<p>iMessage Apps 笔记 (待填坑)<br>IDE 和工具改进<br>除了整合平台战略思想下的一些 SDK 改变，今年和 iOS 开发者相关的更多的是开发工具的进步和革新了。</p>
+<p>Xcode 8<br>Xcode 8 展现出了很多有意思的新特性，比如更强大的 View Debugging，可以帮助我们追查内存引用问题的 Memory Debugging 等。这些工具十分强大，也将帮助我们在开发过程中及早发现问题，而不要将它们带入在最终产品中去。</p>
+<p>在 app 签名方面，Apple 终于意识到了他们在 Xcode 7 中所犯得错误。我想可能不止一个人被证书和描述文件出问题时的 “Fix Issue” 按钮坑过。这个按钮不仅不会修正问题，反而会直接注销现有的开发者证书，然后“自作主张”地重新申请。大多数情况下，这让事情变得更加糟糕。特别是对于新加入的开发者，他们并不理解 Apple 的证书系统，错误的操作和处置，往往让开发环境变得不可挽回。Xcode 8 中，同一个开发者帐号现在允许多个开发证书，而完全重做的 app 签名系统也足够好用，并且避免了误操作的可能性。在兼顾自动配置的基础上，也为大型项目和复杂的 CI 环境提供了足够灵活的配置空间，这绝对值得点赞。</p>
+<p>另外 Xcode 终于提供了进行代码编辑器扩展的能力。现在开发者可以创建 XCSourceEditorExtension 来对 Xcode 的功能进行扩展了，在没有文档帮助和官方支持的情况下摸索着为 Xcode 制作插件的历史也即将结束。</p>
+<p>Xcode 8 笔记 (待填坑)<br>Swift 3<br>Swift 开源已经过去半年时间。在 Swift 2.2 中我们已经看到了开源的社区力量对语言产生的深刻影响，而在 Swift 3 中这一影响的效果将更加明显。</p>
+<p>最大的变化在于 Foundation 框架的重新导入，可能过一段时间再回头看的话，这将标志着 Swift 与 Objective-C 彻底分家。Foundation 框架中的 API 现在以更符合 Swift 的方式被导入到语言中。大体来说，这些变化包括去除 NS 前缀，将绝大部分 class 转换为 struct (虽然底层还是 copy-on-write 的引用实现，可以参看 ReferenceConvertible 协议的内容)，去掉 API 中重复的语义等。如果在当前你还能看出 Swift 和 Objective-C 在使用 Foundation 或者说开发 app 时同根同源的话，Swift 3 正式发布后可能情况会大不相同。</p>
+<p>由于引用类型向值类型的转换，也将导致我们在使用 Swift 开发时的思考方式发生变化。以往的 Foundation 框架中类型的可变性是由不可变类型和它的可变类型版本 (比如 NSData 和 NSMutableData) 来进行区分的。而在 Swift 3 中，一般来说将只有作为结构体的不可变类型 (比如 Data)，对于这类结构体的改变，将会是更安全的基于写时复制的行为，而不再是原来可变对象那样的危险的内存操作。这在很多时候除了保证数据共享时的安全性以外，内部的引用特性也保证了调用速度。实际上，因为减少了不必要的复制 (比如根据一个不可变对象创建相应的可变对象)，实际上通过 Swift 3 的 API 使用 Foundation 的速度将比原来更快！</p>
+<p>关于 Swift 3 的更多内容，我会在我的《Swifter - 100 个 Swift 必备 tips》一书中通过补充章节的方式进行说明。同时，该书现有的 Swift 2 相关的描述和示例也会按照 Swift 3 的语法规范和特性进行更新，以适应最新版本。您可以访问 swifter.tips 获取这本书的更多相关内容。</p>
+<p>Apple 生态和其他<br>另外影响比较重大消息是，在 iOS 9 引入的 ATS 将在来年更加严格。2017 年起，新提交的 app 将不再被允许进行 http 的访问，所有的 app 内的网络请求必须加密，通过 https 完成。所以如果你家 app 的服务器或者某些访问页面还是 http 的话，需要尽早过度到 https。</p>
+<p>另外，watchOS 3 和 tvOS 也有一些新的内容。其中最重要的当属 watchOS 中可以使用 SceneKit 和 SpriteKit。虽然这两个框架本意是做游戏，但是 watch 的小屏幕和低性能可能并不足以支撑我们在这样一个受限平台很好的作品。但是这两个框架可以为交互乏味的 watchOS 提供很好的动画效果的补充，可能会是它们在 watchOS 上更合适的用途。</p>
+<p>最后，OS X 改名为 macOS，有些媒体和开发者将其解读为去乔布斯化，其实我更倾向于这是一种强迫症和完美主义的基本需求。不管名字如何改变，Apple 在 iOS，macOS，watchOS 和 tvOS 这四个产品线上的布局已经完成，整个生态现在看来也还十分健康。Apple 在用户权益和隐私上的重视，以及像是在 https 上的推动，无疑都是这个时代前进的动力。</p>
+<p>总结<br>像往年一样，我会在之后逐渐补充 session 笔记，通过一些简单的例子说明相关的新增框架的使用方式。届时你也可以在这篇文章中找到相关链接，或者通过订阅的方式来确保在第一时间获取相关内容 (订阅时请不要使用 QQ 邮箱，会无法收到邮件)。不过直接访问 Apple 开发者网站 WWDC 相关的内容会是获取这些知识更快的方式。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/31/PhoneGap提高篇，写个插件/" rel="next" title="PhoneGap提高篇，写个插件">
+                <i class="fa fa-chevron-left"></i> PhoneGap提高篇，写个插件
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/08/04/Cordova-源码分析之CordovaActivity/" rel="prev" title="Cordova 源码分析之CordovaActivity">
+                Cordova 源码分析之CordovaActivity <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/06/24/关于Swift-3的新特性/"
+           data-title="关于Swift 3的新特性" data-url="http://tianyejia.net/2016/06/24/关于Swift-3的新特性/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="xiao jiang" />
+          <p class="site-author-name" itemprop="name">xiao jiang</p>
+          <p class="site-description motion-element" itemprop="description">每一个不曾起舞的日子都是对生命的辜负。</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">30</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xiao jiang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+
+
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"tianyejia"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("5bvhH2j9KCMIS01eszQ5elmA-gzGzoHsz", "71sQ2r5ELbN53udv7wiWvHPl");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>

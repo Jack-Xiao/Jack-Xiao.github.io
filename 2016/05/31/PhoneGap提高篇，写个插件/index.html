@@ -1,0 +1,920 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="google0f0bd5e5891a7105" />
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="tianyejia" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="前言：没事写个插件玩下。
+PhoneGap插件phoneGap 插件一般用于js与native java 交互使用，这样可以更加丰富phone gap写的app使用场景。phoneGap插件的目录结构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PhoneGap提高篇，写个插件">
+<meta property="og:url" content="http://tianyejia.net/2016/05/31/PhoneGap提高篇，写个插件/index.html">
+<meta property="og:site_name" content="给时光以生命">
+<meta property="og:description" content="前言：没事写个插件玩下。
+PhoneGap插件phoneGap 插件一般用于js与native java 交互使用，这样可以更加丰富phone gap写的app使用场景。phoneGap插件的目录结构">
+<meta property="og:image" content="http://7xrir6.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-05-31%2018.00.48.png">
+<meta property="og:updated_time" content="2016-05-31T10:28:11.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PhoneGap提高篇，写个插件">
+<meta name="twitter:description" content="前言：没事写个插件玩下。
+PhoneGap插件phoneGap 插件一般用于js与native java 交互使用，这样可以更加丰富phone gap写的app使用场景。phoneGap插件的目录结构">
+<meta name="twitter:image" content="http://7xrir6.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-05-31%2018.00.48.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> PhoneGap提高篇，写个插件 | 给时光以生命 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?409539fd29780a177452384bc846716f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=55248887";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">给时光以生命</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'xGEPPerz-QLS-XKNDR_4','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                PhoneGap提高篇，写个插件
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-31T17:51:40+08:00" content="2016-05-31">
+              2016-05-31
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/31/PhoneGap提高篇，写个插件/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/31/PhoneGap提高篇，写个插件/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/05/31/PhoneGap提高篇，写个插件/" class="leancloud_visitors" data-flag-title="PhoneGap提高篇，写个插件">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>前言：没事写个插件玩下。</p>
+<h3 id="PhoneGap插件"><a href="#PhoneGap插件" class="headerlink" title="PhoneGap插件"></a>PhoneGap插件</h3><p>phoneGap 插件一般用于js与native java 交互使用，这样可以更加丰富phone gap写的app使用场景。<br>phoneGap插件的目录结构<br><img src="http://7xrir6.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-05-31%2018.00.48.png" alt=""><br><a id="more"></a><br>plugin.xml中是关于插件的信心。src/android 中放java 类文件，同理src/ios中放入iOS相应的头文件与实现文件。<br>www里面一般放入的是静态文件，如html/css/ js等。<br>注意，增加插件是，需要在phoneGap的配置文件config.xml中添加</p>
+<pre><code>&lt;plugin name=&quot;com-plugin-test&quot;/&gt;
+</code></pre><p>这里的 name的值就是 每个插件 root 标签Plugin的 id属性值:</p>
+<pre><code>&lt;plugin xmlns=&quot;http://apache.org/cordova/ns/plugins/1.0&quot;
+    xmlns:android=&quot; http://schemas.android.com/apk/res/android&quot;
+    id=&quot;cordova-plugin-test&quot;
+    version=&quot;0.0.1&quot;&gt;     
+</code></pre><h3 id="plugin-xml-配置"><a href="#plugin-xml-配置" class="headerlink" title="plugin.xml 配置"></a>plugin.xml 配置</h3><p>一份简单的插件配置清单如下：</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;plugin xmlns=&quot;http://apache.org/cordova/ns/plugins/1.0&quot;
+    xmlns:android=&quot; http://schemas.android.com/apk/res/android&quot;
+    id=&quot;cordova-plugin-test&quot;
+    version=&quot;0.0.1&quot;&gt;
+&lt;name&gt;PluginTest&lt;/name&gt;
+&lt;description&gt;This is only a test for cordova plugin.&lt;/description&gt;
+&lt;author&gt;Jack&lt;/author&gt;
+&lt;license&gt;Apache 2.0 License&lt;/license&gt;
+&lt;engines&gt;
+    &lt;engine name=&quot;cordova&quot; version=&quot;&gt;=3.0.0&quot; /&gt;
+&lt;/engines&gt;
+&lt;js-module src=&quot;www/TestPlugin.js&quot; name=&quot;TestPlugin&quot;&gt;
+    &lt;clobbers target=&quot;cordova.plugins.TestPlugin&quot; /&gt;
+&lt;/js-module&gt;
+
+&lt;platform name=&quot;android&quot;&gt;
+    &lt;config-file target=&quot;res/xml/config.xml&quot; parent=&quot;/*&quot;&gt;
+        &lt;feature name=&quot;TestPlugin&quot;&gt;
+            &lt;param name=&quot;android-package&quot; value=&quot;org.apache.cordova.test.TestPlugin&quot;/&gt;
+        &lt;/feature&gt;
+    &lt;/config-file&gt;
+    &lt;source-file src=&quot;src/android/test/TestPlugin.java&quot; target-dir=&quot;src/org/apache/cordova/test&quot; /&gt;
+&lt;/platform&gt;
+&lt;/plugin&gt;
+</code></pre><table><br><tr><br><th>元素</th><br><th>描述</th><br></tr><br><tr><br><td>plugin</td><br><td>定义命名空间，ID和插件版本。应该用定义在<em><a href="http://apache.org/cordova/ns/plugins/1.0" target="_blank" rel="external">http://apache.org/cordova/ns/plugins/1.0</a></em>命名空间。plugin的ID在输入<em>cordova plugins</em>命令时在插件列表中显示。</td><br></tr><br><tr><br><td>name</td><br><td>定义插件的名字。</td><br></tr><br><tr><br><td>description</td><br><td>定义插件的描述信息。</td><br></tr><br><tr><br><td>author</td><br><td>定义插件作者的名字。</td><br></tr><br><tr><br><td>keywords</td><br><td>定义与插件相关的关键字。Cordova研发组建立了公开、可搜索的插件仓库，添加的关键字能在你把插件提交到仓库后帮助被发现。</td><br></tr><br><tr><br><td>license</td><br><td>定义插件的许可。例中是Cordova默认的许可，还可以是许可描述或许可期限的链接。</td><br></tr><br><tr><br><td>engines</td><br><td>用来定义插件支持的Cordova版本。再添加<em>engine</em>元素定义每个支持的Cordova版本。</td><br></tr><br><tr><br><td>js-module</td><br><td>指js文件名，而这个文件会自动以<code>&amp;lt;script</code>&gt;标签的形式添加到Cordova项目的起始页。通过在<em>js-module</em>中列出插件，可以减少开发者的工作。<em>clobbers</em>元素说明了<em>module.exports</em>自动添加到<em>window</em>对象，让插件方法能够在窗口级别使用。</td><br></tr><br><tr><br><td>info</td><br><td>它是另一个除了<em>description</em>外说插件信息的地方。</td><br></tr><br></table>
+
+<h3 id="java文件中的定义"><a href="#java文件中的定义" class="headerlink" title="java文件中的定义"></a>java文件中的定义</h3><p>最简便的代码清单如下：<br>    package org.apache.cordova.test;</p>
+<p>import org.apache.cordova.CallbackContext;<br>import org.apache.cordova.CordovaPlugin;<br>import org.json.JSONArray;<br>import org.json.JSONException;</p>
+<p>/**</p>
+<ul>
+<li><p>Created by Jack on 16/5/27.<br>*/<br>public class TestPlugin extends CordovaPlugin {<br> public static final String TEST_PLUGIN = “test_plugin”;</p>
+<p> @Override<br> public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {</p>
+<pre><code>//return super.execute(action, args, callbackContext);
+if(action.equals(TEST_PLUGIN)){
+    callbackContext.success(&quot;SUCCESS&quot;);
+}else{
+    callbackContext.error(&quot;ERROR&quot;);
+}
+return true;
+}
+</code></pre><p> }</p>
+</li>
+</ul>
+<h3 id="写js文件"><a href="#写js文件" class="headerlink" title="写js文件"></a>写js文件</h3><p>js 文件写在www 中，plugin.xml中<js-module> 有定义我们的js文件，于是我们在www中创建     TestPlugin.js文件。但js内的写法有很多种，我们这里采用低耦合性的写法：</js-module></p>
+<pre><code>var exec=require(&apos;cordova/exec&apos;);
+var   test={
+get:function(action,successCallback,errorCallback){
+    //return 43;
+    exec(successCallback,errorCallback,&quot;TestPlugin&quot;,action,[])
+    //exec(successCallback, errorCallback, &quot;Device&quot;, &quot;getDeviceInfo&quot;, []);
+    }
+};
+module.exports=test;
+</code></pre><p>这里主要exec 的第三个参数”TestPlugin”，该参数对应的就是plugin.xml中,name 标签中的值了。如果没有对应到该值，会报”Class not found” 错误。</p>
+<h3 id="尾声：js的调用"><a href="#尾声：js的调用" class="headerlink" title="尾声：js的调用"></a>尾声：js的调用</h3><pre><code>&lt;script type=&quot;text/javascript&quot; &gt;
+     app.initialize();
+     function onClickTest2(){
+        alert(&quot;第一步 定义&quot;);
+        alert(&quot;第一步 定义1&quot;);
+        cordova.plugins.TestPlugin.get(&quot;test_plugin&quot;,function(message) {
+             alert(message);
+         }, function(message) {
+             alert(message)
+         });
+     }
+  &lt;/script&gt;
+</code></pre><p>至此，就可以愉快的写PhoneGap插件了<br>Reference:<br><a href="https://segmentfault.com/a/1190000003022593" target="_blank" rel="external">https://segmentfault.com/a/1190000003022593</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/29/Cocopods-App-使用/" rel="next" title="Cocopods App 使用">
+                <i class="fa fa-chevron-left"></i> Cocopods App 使用
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/06/24/关于Swift-3的新特性/" rel="prev" title="关于Swift 3的新特性">
+                关于Swift 3的新特性 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/05/31/PhoneGap提高篇，写个插件/"
+           data-title="PhoneGap提高篇，写个插件" data-url="http://tianyejia.net/2016/05/31/PhoneGap提高篇，写个插件/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="xiao jiang" />
+          <p class="site-author-name" itemprop="name">xiao jiang</p>
+          <p class="site-description motion-element" itemprop="description">每一个不曾起舞的日子都是对生命的辜负。</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">30</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#PhoneGap插件"><span class="nav-number">1.</span> <span class="nav-text">PhoneGap插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#plugin-xml-配置"><span class="nav-number">2.</span> <span class="nav-text">plugin.xml 配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#java文件中的定义"><span class="nav-number">3.</span> <span class="nav-text">java文件中的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#写js文件"><span class="nav-number">4.</span> <span class="nav-text">写js文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#尾声：js的调用"><span class="nav-number">5.</span> <span class="nav-text">尾声：js的调用</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xiao jiang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+
+
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"tianyejia"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("5bvhH2j9KCMIS01eszQ5elmA-gzGzoHsz", "71sQ2r5ELbN53udv7wiWvHPl");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1011 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="google0f0bd5e5891a7105" />
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="tianyejia" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="什么是Node.jsnode.js是一个JavaScript 运行环境。实际上它是对Google V8引擎进行了封装。Node采用了一个称为“事件循环(event loop)”的架构（参看阮一峰的这篇博客）,所有的异步回调函数都会加入到“任务队列”中，主线程执行完stack中的代码就会开始调用“任务队列”中的代码（”任务队列”先进先出原则).
+1.Node.js REPL所谓REPL(Read E">
+<meta property="og:type" content="article">
+<meta property="og:title" content="初学Node.js">
+<meta property="og:url" content="http://tianyejia.net/2016/09/27/初学Node-js/index.html">
+<meta property="og:site_name" content="给时光以生命">
+<meta property="og:description" content="什么是Node.jsnode.js是一个JavaScript 运行环境。实际上它是对Google V8引擎进行了封装。Node采用了一个称为“事件循环(event loop)”的架构（参看阮一峰的这篇博客）,所有的异步回调函数都会加入到“任务队列”中，主线程执行完stack中的代码就会开始调用“任务队列”中的代码（”任务队列”先进先出原则).
+1.Node.js REPL所谓REPL(Read E">
+<meta property="og:image" content="http://7xrir6.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-09-27%20%E4%B8%8B%E5%8D%883.42.30.png">
+<meta property="og:image" content="http://7xrir6.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-09-27%20%E4%B8%8B%E5%8D%884.28.49.png">
+<meta property="og:updated_time" content="2016-09-28T08:18:09.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="初学Node.js">
+<meta name="twitter:description" content="什么是Node.jsnode.js是一个JavaScript 运行环境。实际上它是对Google V8引擎进行了封装。Node采用了一个称为“事件循环(event loop)”的架构（参看阮一峰的这篇博客）,所有的异步回调函数都会加入到“任务队列”中，主线程执行完stack中的代码就会开始调用“任务队列”中的代码（”任务队列”先进先出原则).
+1.Node.js REPL所谓REPL(Read E">
+<meta name="twitter:image" content="http://7xrir6.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-09-27%20%E4%B8%8B%E5%8D%883.42.30.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 初学Node.js | 给时光以生命 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?409539fd29780a177452384bc846716f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=55248887";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">给时光以生命</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'xGEPPerz-QLS-XKNDR_4','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                初学Node.js
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-27T14:08:23+08:00" content="2016-09-27">
+              2016-09-27
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/27/初学Node-js/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/27/初学Node-js/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/09/27/初学Node-js/" class="leancloud_visitors" data-flag-title="初学Node.js">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="什么是Node-js"><a href="#什么是Node-js" class="headerlink" title="什么是Node.js"></a>什么是<a href="http://baike.baidu.com/link?url=s8biSWzK_lkRR0Sk97x8wERbzu2v15yXh-kQeajggSx_xy18am0O3Spstn4vD65jNvLYCIYFSIx-EF2rZgrpVK" target="_blank" rel="external">Node.js</a></h3><p>node.js是一个JavaScript 运行环境。实际上它是对Google V8引擎进行了封装。Node采用了一个称为“事件循环(event loop)”的架构（参看阮一峰的<a href="http://www.ruanyifeng.com/blog/2014/10/event-loop.html" target="_blank" rel="external">这篇博客</a>）,所有的异步回调函数都会加入到“任务队列”中，主线程执行完stack中的代码就会开始调用“任务队列”中的代码（”任务队列”先进先出原则).</p>
+<h3 id="1-Node-js-REPL"><a href="#1-Node-js-REPL" class="headerlink" title="1.Node.js REPL"></a>1.Node.js REPL</h3><p>所谓REPL(Read Eval Print Loop:交互式解释器)，类型在终端或iTerm中输入命令，并接受到系统的响应。<br>同类的python 可输入 platon 进入REPL</p>
+<pre><code>python 
+</code></pre><p>node 的输入</p>
+<pre><code>node
+</code></pre><a id="more"></a>
+<h3 id="2-事件（EventEmitter）"><a href="#2-事件（EventEmitter）" class="headerlink" title="2.事件（EventEmitter）"></a>2.事件（EventEmitter）</h3><p>Node.js使用事件驱动模型，使用观察者模式.<br>Node.js所有的异步I/O操作在完成是都会发送一个事件到事件队列。<br>所有这些产生事件的对象都是events.EventEmitter的实例。<br>EventEmitter的核心就是事件触发与事件监听器功能的封装。</p>
+<pre><code>//引入 events 模块
+var events = require(&apos;events&apos;);
+//创建 eventEmitter 对象
+var eventEmitter = new events.EventEmitter();
+eventEmitter.on(&apos;some_event&apos;,function(){
+    console.log(&apos;some_event 事件触发&apos;);
+});
+</code></pre><p>大多时候我们不会直接使用EventEmitter,而是在对象中继承它。包括fs、net、http。<br>原因：<br>    首先，具有某个实体功能的对象实现事件符合语义， 事件的监听和发射应该是一个对象的方法。<br>其次 JavaScript 的对象机制是基于原型的，支持 部分多重继承，继承 EventEmitter 不会打乱对象原有的继承关系。</p>
+<h3 id="3-Buffer-缓冲区"><a href="#3-Buffer-缓冲区" class="headerlink" title="3. Buffer(缓冲区)"></a>3. Buffer(缓冲区)</h3><p>Buffer 类，该类用来创建一个专门存放二进制数据的缓存区。<br>一个 Buffer 类似于一个整数数组，但它对应于 V8 堆内存之外的一块原始内存。</p>
+<h3 id="4-Stream-流"><a href="#4-Stream-流" class="headerlink" title="4. Stream(流)"></a>4. Stream(流)</h3><h4 id="从流中读取数据"><a href="#从流中读取数据" class="headerlink" title="从流中读取数据"></a>从流中读取数据</h4><pre><code>var fs = require(&apos;fs&apos;);
+var data = &apos;&apos;;
+//创建可读流
+var readerStream = fs.createReadStream(&apos;input.txt&apos;);
+//设置编码为 utf8.
+readerStream.setEncodiing(&apos;UTF8&apos;);
+//处理流事件 --&gt; data, end, and error
+reader.on(&apos;data&apos;, function(chunk){
+    data += chunk;
+});
+</code></pre><h4 id="写入流"><a href="#写入流" class="headerlink" title="写入流"></a>写入流</h4><pre><code>var writeStream = fs.createWriteStream(&apos;output.txt&apos;);
+writerStream.write(data,&apos;UTF8&apos;);
+//标记文件末尾
+writerStream.end();
+</code></pre><h4 id="管道流"><a href="#管道流" class="headerlink" title="管道流"></a>管道流</h4><p>管道提供了一个输出流到输入流的机制。通常我们用于从一个流中获取数据并将数据传递到另外一个流中。</p>
+<pre><code>var fs = require(&quot;fs&quot;);
+var readerStream = fs.createReadStream(&apos;input.txt&apos;);
+var writerStream = fs.createWriteStream(&apos;output.txt&apos;);
+//管道读写操作
+readerStream.pip(writerStream);
+</code></pre><h4 id="链式流"><a href="#链式流" class="headerlink" title="链式流"></a>链式流</h4><p>链式是通过连接输出流到另外一个流并创建多个对个流操作链的机制。链式流一般用于管道操作。</p>
+<pre><code>var fs = require(&quot;fs&quot;);
+var zlib = require(&quot;zlib&quot;);
+//压缩 input.txt 文件为 input.txt.gz
+fs.createReadStream(&apos;input.txt&apos;)
+    .pipe(zlib.createGzip())
+    .pipe(fs.createWriteStream(&apos;input.txt.gz&apos;));
+</code></pre><h3 id="5-模块系统"><a href="#5-模块系统" class="headerlink" title="5.模块系统"></a>5.模块系统</h3><p>模块是Node.js 应用程序的基本组成部分，文件和模块是一一对应的。换言之，一个 Node.js 文件就是一个模块。<br>Node.js 提供了exports 和 require 两个对象，其中 exports 是模块公开的接口，require 用于从外部获取一个模块的接口，即所获取模块的 exports 对象。<br>Node.js中的require方法中的文件查找策略如下：<br><img src="http://7xrir6.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-09-27%20%E4%B8%8B%E5%8D%883.42.30.png" alt=""></p>
+<h3 id="6-函数"><a href="#6-函数" class="headerlink" title="6.函数"></a>6.函数</h3><p>在JavaScript中，一个函数可以作为另一个函数接收一个参数。我们可以先定义一个函数，然后传递，也可以在传递参数的地方直接定义函数。</p>
+<h4 id="7-匿名函数"><a href="#7-匿名函数" class="headerlink" title="7.匿名函数"></a>7.匿名函数</h4><pre><code>var http = require(&quot;http&quot;);
+http.createServer(function(request, response) {
+  response.writeHead(200, {&quot;Content-Type&quot;: &quot;text/plain&quot;});
+  response.write(&quot;Hello World&quot;);
+  response.end();
+}).listen(8888);
+</code></pre><h3 id="8-路由"><a href="#8-路由" class="headerlink" title="8.路由"></a>8.路由</h3><p>我们要为路由提供请求的URL和其他需要的GET及POST参数，随后路由需要根据这些数据来执行相应的代码。</p>
+<pre><code>var server = require(&quot;./server&quot;);
+var router = require(&quot;./router&quot;);
+
+server.start(router.route);
+</code></pre><h3 id="9-全局对象"><a href="#9-全局对象" class="headerlink" title="9.全局对象"></a>9.全局对象</h3><p>全局对象（Global Object），它及其所有属性都可以在程序的任何地方访问，即全局变量。<br>global 最根本的作用是作为全局变量的宿主。按照 ECMAScript 的定义，满足以下条 件的变量是全局变量：</p>
+<ol>
+<li>最外层定义的变量</li>
+<li>全局对象的属性</li>
+<li>隐式定义的变量(未定义直接赋值的变量)</li>
+</ol>
+<h4 id="filename"><a href="#filename" class="headerlink" title="__filename"></a>__filename</h4><p>__filename 表示当前正在执行的脚本的文件名。它将输出文件所在位置的绝对路径，且和命令行参数所指定的文件名不一定相同。 如果在模块中，返回的值是模块文件的路径。</p>
+<h4 id="dirname"><a href="#dirname" class="headerlink" title="__dirname"></a>__dirname</h4><p>__dirname 表示当前执行脚本所在的目录。</p>
+<h4 id="setTimeout-cb-ms"><a href="#setTimeout-cb-ms" class="headerlink" title="setTimeout(cb, ms)"></a>setTimeout(cb, ms)</h4><p>setTimeout(cb, ms) 全局函数在指定的毫秒(ms)数后执行指定函数(cb)。：setTimeout() 只执行一次指定函数。<br>返回一个代表定时器的句柄值。</p>
+<h4 id="clearTimeout-t"><a href="#clearTimeout-t" class="headerlink" title="clearTimeout(t)"></a>clearTimeout(t)</h4><p>clearTimeout( t ) 全局函数用于停止一个之前通过 setTimeout() 创建的定时器。 参数 t 是通过 setTimeout() 函数创建的计算器。</p>
+<h4 id="setInterval-cb-ms"><a href="#setInterval-cb-ms" class="headerlink" title="setInterval(cb, ms)"></a>setInterval(cb, ms)</h4><p>setInterval(cb, ms) 全局函数在指定的毫秒(ms)数后执行指定函数(cb)。<br>返回一个代表定时器的句柄值。可以使用 clearInterval(t) 函数来清除定时器。<br>setInterval() 方法会不停地调用函数，直到 clearInterval() 被调用或窗口被关闭。</p>
+<h4 id="console"><a href="#console" class="headerlink" title="console"></a>console</h4><p>打印输出</p>
+<h4 id="process"><a href="#process" class="headerlink" title="process"></a>process</h4><p>process 是一个全局变量，即 global 对象的属性。</p>
+<h4 id="11-常用工具"><a href="#11-常用工具" class="headerlink" title="11. 常用工具"></a>11. 常用工具</h4><p>util 是一个Node.js 核心模块，提供常用函数的集合，用于弥补核心JavaScript 的功能 过于精简的不足。</p>
+<h4 id="util-inherits"><a href="#util-inherits" class="headerlink" title="util.inherits"></a>util.inherits</h4><p>util.inherits(constructor, superConstructor)是一个实现对象间原型继承 的函数。</p>
+<h4 id="util-inspect"><a href="#util-inspect" class="headerlink" title="util.inspect"></a>util.inspect</h4><p>util.inspect(object,[showHidden],[depth],[colors])是一个将任意对象转换 为字符串的方法，通常用于调试和错误输出。它至少接受一个参数 object，即要转换的对象。</p>
+<h4 id="util-isArray-object"><a href="#util-isArray-object" class="headerlink" title="util.isArray(object)"></a>util.isArray(object)</h4><h4 id="util-isRegExp-object"><a href="#util-isRegExp-object" class="headerlink" title="util.isRegExp(object)"></a>util.isRegExp(object)</h4><h4 id="util-isDate-object"><a href="#util-isDate-object" class="headerlink" title="util.isDate(object)"></a>util.isDate(object)</h4><h4 id="util-isError-object"><a href="#util-isError-object" class="headerlink" title="util.isError(object)"></a>util.isError(object)</h4><h3 id="12-文件系统"><a href="#12-文件系统" class="headerlink" title="12.文件系统"></a>12.文件系统</h3><h3 id="13-GET-POST-请求"><a href="#13-GET-POST-请求" class="headerlink" title="13.GET/POST 请求"></a>13.GET/POST 请求</h3><pre><code>var http = require(&apos;http&apos;);
+var url = require(&apos;url&apos;);
+var util = require(&apos;util&apos;);
+
+http.createServer(function(req, res){
+    res.writeHead(200, {&apos;Content-Type&apos;: &apos;text/plain&apos;});
+    res.end(util.inspect(url.parse(req.url, true)));
+}).listen(3000);
+</code></pre><h3 id="14-工具模块"><a href="#14-工具模块" class="headerlink" title="14. 工具模块"></a>14. 工具模块</h3><p>常用模块<br>OS 模块: 提供基本的系统操作函数<br>Path 模块: 提供了处理和转换文件路的工具<br>Net 模块: 用于底层的网络通信。提供了服务端和客户端的的操作。<br>DNS 模块: 用于解析域名。<br>Domain 模块: 简化异步代码的异常处理，可以捕捉处理try catch无法捕捉的。</p>
+<h3 id="15-Web模块"><a href="#15-Web模块" class="headerlink" title="15. Web模块"></a>15. Web模块</h3><p>Web服务器一般指网站服务器，是指驻留于因特网上某种类型计算机的程序，Web服务器的基本功能就是提供Web信息浏览服务。它只需支持HTTP协议、HTML文档格式及URL，与客户端的网络浏览器配合。<br>大多数 web 服务器都支持服务端的脚本语言（php、python、ruby）等，并通过脚本语言从数据库获取数据，将结果返回给客户端浏览器。<br>目前最主流的三个Web服务器是Apache、Nginx、IIS。<br><img src="http://7xrir6.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-09-27%20%E4%B8%8B%E5%8D%884.28.49.png" alt=""></p>
+<h3 id="16-Express框架"><a href="#16-Express框架" class="headerlink" title="16. Express框架"></a>16. Express框架</h3><p>Express 是一个简洁而灵活的 node.js Web应用框架, 提供了一系列强大特性帮助你创建各种 Web 应用，和丰富的 HTTP 工具。<br>使用 Express 可以快速地搭建一个完整功能的网站。<br>Express 框架核心特性：        </p>
+<ol>
+<li>可以设置中间件来响应 HTTP 请求。        </li>
+<li>定义了路由表用于执行不同的 HTTP 请求动作。</li>
+<li>可以通过向模板传递参数来动态渲染 HTML 页面。</li>
+</ol>
+<h3 id="17-文件上传与下载"><a href="#17-文件上传与下载" class="headerlink" title="17. 文件上传与下载"></a>17. 文件上传与下载</h3><p>通常文件上传用的是formidable模板，执行</p>
+<pre><code>cd projectPath
+npm install formidable
+</code></pre><p>上传：</p>
+<pre><code>var formidable = require(&apos;formidable&apos;);
+var fs = require(&apos;fs&apos;);
+TITLE = &apos;formidable上传示例&apos;,
+exports.upload = function(req, res, next) {
+console.log(&quot;begin upload file&quot;);
+var message = &apos;&apos;;
+var form = new formidable.IncomingForm();   //创建上传表单
+form.encoding = &apos;utf-8&apos;;        //设置编辑
+form.uploadDir = &apos;public/upload/&apos;;     //设置上传目录
+form.keepExtensions = true;     //保留后缀
+form.maxFieldsSize = 2 * 1024 * 1024;   //文件大小
+
+form.parse(req, function (err, fields, files) {
+    if (err) {
+        console.log(err);
+        res.locals.error = err;
+        res.render(&apos;index&apos;,{title: TITLE});
+        return;
+    }
+    console.log(&quot;打印开始....&quot;);
+    var extName = &apos;&apos;; //后缀名
+    var type = files.uploadFile.type;
+    switch (files.uploadFile.type){
+        case &apos;image/pjpeg&apos;:
+            extName = &apos;jpg&apos;;
+            break;
+        case &apos;image/jpeg&apos;:
+            extName = &apos;jpg&apos;;
+            break;
+        case &apos;image/png&apos;:
+            extName = &apos;png&apos;;
+        case &apos;image/x-png&apos;:
+            extName = &apos;png&apos;;
+        case &apos;txt&apos;:
+            extName = &apos;text/plain&apos;;
+        case &apos;application/pdf&apos;:
+
+    }
+
+    // if(extName.length == 0){
+    //     res.locals.error = &apos;只支持png和jpg格式图片&apos;;
+    //     res.render(&apos;index&apos;,{title: TITLE});
+    // }
+
+    var filename = files.uploadFile.name;
+    //files.names;
+    // 对文件名进行处理，以应对上传同名文件的情况
+    var nameArray = filename.split(&apos;.&apos;);
+    var type = nameArray[nameArray.length - 1];
+    var name = &apos;&apos;;
+    for (var i = 0; i &lt; nameArray.length - 1; i++) {
+        name = name + nameArray[i];
+    }
+    var rand = Math.random() * 100 + 900;
+    //var num = new Date(System.currentTime);
+    var num = parseInt(rand, 10);
+
+    var avatarName = name + num + &apos;.&apos; + type;
+
+    var newPath = form.uploadDir + avatarName;
+    fs.renameSync(files.uploadFile.path, newPath);  //重命名
+    console.log(&quot;上传成功&quot;);
+});
+res.locals.success = &apos;上传成功&apos;;
+res.render(&apos;index&apos;,{title: TITLE});
+};
+</code></pre><p>files.uploadFile中的uploadFile 为上传的field, </p>
+<p>下载：</p>
+<pre><code>exports.download = function(req, res){
+console.log(&quot;begin download file&quot;);
+var path = &apos;public/upload/readme.txt&apos;;  // 文件存储的路径
+
+// filename:设置下载时文件的文件名，可不填，则为原名称
+res.download(path);
+};
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/15/mac下apktool反编译、重新签名/" rel="next" title="mac下apktool反编译、重新签名">
+                <i class="fa fa-chevron-left"></i> mac下apktool反编译、重新签名
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/13/mvp/" rel="prev" title="mvp">
+                mvp <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/09/27/初学Node-js/"
+           data-title="初学Node.js" data-url="http://tianyejia.net/2016/09/27/初学Node-js/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="xiao jiang" />
+          <p class="site-author-name" itemprop="name">xiao jiang</p>
+          <p class="site-description motion-element" itemprop="description">每一个不曾起舞的日子都是对生命的辜负。</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">30</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是Node-js"><span class="nav-number">1.</span> <span class="nav-text">什么是Node.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Node-js-REPL"><span class="nav-number">2.</span> <span class="nav-text">1.Node.js REPL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-事件（EventEmitter）"><span class="nav-number">3.</span> <span class="nav-text">2.事件（EventEmitter）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Buffer-缓冲区"><span class="nav-number">4.</span> <span class="nav-text">3. Buffer(缓冲区)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Stream-流"><span class="nav-number">5.</span> <span class="nav-text">4. Stream(流)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#从流中读取数据"><span class="nav-number">5.1.</span> <span class="nav-text">从流中读取数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#写入流"><span class="nav-number">5.2.</span> <span class="nav-text">写入流</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#管道流"><span class="nav-number">5.3.</span> <span class="nav-text">管道流</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#链式流"><span class="nav-number">5.4.</span> <span class="nav-text">链式流</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-模块系统"><span class="nav-number">6.</span> <span class="nav-text">5.模块系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-函数"><span class="nav-number">7.</span> <span class="nav-text">6.函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#7-匿名函数"><span class="nav-number">7.1.</span> <span class="nav-text">7.匿名函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-路由"><span class="nav-number">8.</span> <span class="nav-text">8.路由</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-全局对象"><span class="nav-number">9.</span> <span class="nav-text">9.全局对象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#filename"><span class="nav-number">9.1.</span> <span class="nav-text">__filename</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dirname"><span class="nav-number">9.2.</span> <span class="nav-text">__dirname</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#setTimeout-cb-ms"><span class="nav-number">9.3.</span> <span class="nav-text">setTimeout(cb, ms)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#clearTimeout-t"><span class="nav-number">9.4.</span> <span class="nav-text">clearTimeout(t)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#setInterval-cb-ms"><span class="nav-number">9.5.</span> <span class="nav-text">setInterval(cb, ms)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#console"><span class="nav-number">9.6.</span> <span class="nav-text">console</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#process"><span class="nav-number">9.7.</span> <span class="nav-text">process</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#11-常用工具"><span class="nav-number">9.8.</span> <span class="nav-text">11. 常用工具</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#util-inherits"><span class="nav-number">9.9.</span> <span class="nav-text">util.inherits</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#util-inspect"><span class="nav-number">9.10.</span> <span class="nav-text">util.inspect</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#util-isArray-object"><span class="nav-number">9.11.</span> <span class="nav-text">util.isArray(object)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#util-isRegExp-object"><span class="nav-number">9.12.</span> <span class="nav-text">util.isRegExp(object)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#util-isDate-object"><span class="nav-number">9.13.</span> <span class="nav-text">util.isDate(object)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#util-isError-object"><span class="nav-number">9.14.</span> <span class="nav-text">util.isError(object)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-文件系统"><span class="nav-number">10.</span> <span class="nav-text">12.文件系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-GET-POST-请求"><span class="nav-number">11.</span> <span class="nav-text">13.GET/POST 请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14-工具模块"><span class="nav-number">12.</span> <span class="nav-text">14. 工具模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-Web模块"><span class="nav-number">13.</span> <span class="nav-text">15. Web模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16-Express框架"><span class="nav-number">14.</span> <span class="nav-text">16. Express框架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#17-文件上传与下载"><span class="nav-number">15.</span> <span class="nav-text">17. 文件上传与下载</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xiao jiang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+
+
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"tianyejia"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("5bvhH2j9KCMIS01eszQ5elmA-gzGzoHsz", "71sQ2r5ELbN53udv7wiWvHPl");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>
