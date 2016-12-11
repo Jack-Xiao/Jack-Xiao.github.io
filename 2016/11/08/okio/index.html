@@ -71,7 +71,7 @@ okio框架结构与源码分析Okio的简单使用Okio库的核心是两个接�
 <meta property="og:image" content="http://7xrir6.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-11-08%20%E4%B8%8B%E5%8D%882.12.09.png">
 <meta property="og:image" content="http://7xrir6.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-11-08%20%E4%B8%8B%E5%8D%882.30.51.png">
 <meta property="og:image" content="http://7xrir6.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-11-08%20%E4%B8%8B%E5%8D%882.32.09.png">
-<meta property="og:updated_time" content="2016-11-08T06:51:03.000Z">
+<meta property="og:updated_time" content="2016-12-11T00:51:42.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="okio解析">
 <meta name="twitter:description" content="okio的作用okio是作为OkHttp网络请求的io包装库，io文件操作简单。减少了很多io操作的基本代码,并且对内存和cpu使用做了优化。
@@ -309,7 +309,7 @@ okio框架结构与源码分析Okio的简单使用Okio库的核心是两个接�
 
       
         <h3 id="okio的作用"><a href="#okio的作用" class="headerlink" title="okio的作用"></a>okio的作用</h3><p>okio是作为OkHttp网络请求的io包装库，io文件操作简单。减少了很多io操作的基本代码,并且对内存和cpu使用做了优化。</p>
-<h2 id="okio框架结构与源码分析"><a href="#okio框架结构与源码分析" class="headerlink" title="okio框架结构与源码分析"></a>okio框架结构与源码分析</h2><h4 id="Okio的简单使用"><a href="#Okio的简单使用" class="headerlink" title="Okio的简单使用"></a>Okio的简单使用</h4><p>Okio库的核心是两个接口Sink和Source，这两个接口都继承了Closeable接口；而Sink可以简单的看做OutputStream（将流写入文件），Source可以简单的看做InputStream（从文件读取至流）。而这两个接口都是支持读写超时设置的。其中，Sink声明了write()、flush()、close()、timeout()等方法，Source中声明了read()、close()、timeout(),这些方法包含了对文件的读写及资源的释放。它们各自有一个支持缓冲区的子类接口，BufferedSink和BufferedSource，这两个子接口有一个共同的实现类Buffer,对缓冲区操作。<br><img src="http://7xrir6.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-11-08%20%E4%B8%8B%E5%8D%882.12.01.png" alt=""></p>
+<h2 id="okio框架结构与源码分析"><a href="#okio框架结构与源码分析" class="headerlink" title="okio框架结构与源码分析"></a>okio框架结构与源码分析</h2><h4 id="Okio的简单使用"><a href="#Okio的简单使用" class="headerlink" title="Okio的简单使用"></a>Okio的简单使用</h4><p>Okio库的核心是两个接口Sink和Source，这两个接口都继承了Closeable接口；而Sink可以简单的看做OutputStream（将流写入文件），Source可以简单的看做InputStream（从文件读取至流）。而这两个接口都是支持读写超时设置的。其中，Sink声明了write()、flush()、close()、timeout()等方法，Source中声明了read()、close()、timeout(),这些方法包含了对文件的读写及资源的释放。它们各自有一个支持缓冲区的子类接口，BufferedSink和BufferedSource，这两个子接口有一个共同的实现类Buffer,对缓冲区操作。<br><img src="http://7xrir6.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-11-08%20%E4%B8%8B%E5%8D%882.12.01.png" alt=""><br><a id="more"></a></p>
 <h4 id="BufferedSink及BufferedSource"><a href="#BufferedSink及BufferedSource" class="headerlink" title="BufferedSink及BufferedSource"></a>BufferedSink及BufferedSource</h4><p>BufferedSink中定义了一系列写入缓存区的方法，当然其一定定义了与Buffer相关的方法，具体方法相见官方API。</p>
 <pre><code>BufferedSink     write(byte[] source) 将字符数组source 写入
 BufferedSink     write(byte[] source, int offset, int   byteCount)  将字符数组的从offset开始的byteCount个字符写入
