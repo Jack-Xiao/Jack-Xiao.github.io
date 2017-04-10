@@ -59,16 +59,19 @@
 
 
 
-<meta name="description" content="每一个不曾起舞的日子都是对生命的辜负。">
+<meta name="description" content="NestedScrollView 嵌套ViewPager 在嵌套 RecyclerView根据业务的需要, 设想了一种NestedScrollView中 嵌套ViewPager, 在ViewPager中继续嵌套RecyclerView，然而当RecyclerView包含多个ItemType时,左右滑动ViewPager时就会产生问题。
+于是换成一种NestedScrollView 包含多个Recy">
 <meta property="og:type" content="article">
-<meta property="og:title" content="由MVP模式引起的一些思考">
-<meta property="og:url" content="http://tianyejia.net/2016/03/11/2016-03-11-you-mvpmo-shi-yin-qi-de-[">
+<meta property="og:title" content="NestedScrollView 嵌套ViewPager 在嵌套 RecyclerView">
+<meta property="og:url" content="http://tianyejia.net/2017/03/28/NestedScrolling滑动/index.html">
 <meta property="og:site_name" content="给时光以生命">
-<meta property="og:description" content="每一个不曾起舞的日子都是对生命的辜负。">
-<meta property="og:updated_time" content="2016-03-11T03:57:14.000Z">
+<meta property="og:description" content="NestedScrollView 嵌套ViewPager 在嵌套 RecyclerView根据业务的需要, 设想了一种NestedScrollView中 嵌套ViewPager, 在ViewPager中继续嵌套RecyclerView，然而当RecyclerView包含多个ItemType时,左右滑动ViewPager时就会产生问题。
+于是换成一种NestedScrollView 包含多个Recy">
+<meta property="og:updated_time" content="2017-04-10T08:42:26.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="由MVP模式引起的一些思考">
-<meta name="twitter:description" content="每一个不曾起舞的日子都是对生命的辜负。">
+<meta name="twitter:title" content="NestedScrollView 嵌套ViewPager 在嵌套 RecyclerView">
+<meta name="twitter:description" content="NestedScrollView 嵌套ViewPager 在嵌套 RecyclerView根据业务的需要, 设想了一种NestedScrollView中 嵌套ViewPager, 在ViewPager中继续嵌套RecyclerView，然而当RecyclerView包含多个ItemType时,左右滑动ViewPager时就会产生问题。
+于是换成一种NestedScrollView 包含多个Recy">
 
 
 
@@ -86,7 +89,7 @@
   };
 </script>
 
-  <title> 由MVP模式引起的一些思考 | 给时光以生命 </title>
+  <title> NestedScrollView 嵌套ViewPager 在嵌套 RecyclerView | 给时光以生命 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -245,7 +248,7 @@
             
             
               
-                由MVP模式引起的一些思考
+                NestedScrollView 嵌套ViewPager 在嵌套 RecyclerView
               
             
           </h1>
@@ -257,8 +260,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-11T11:57:14+08:00" content="2016-03-11">
-              2016-03-11
+            <time itemprop="dateCreated" datetime="2017-03-28T17:27:50+08:00" content="2017-03-28">
+              2017-03-28
             </time>
           </span>
 
@@ -268,8 +271,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/03/11/2016-03-11-you-mvpmo-shi-yin-qi-de-[?]-xie-si-kao/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/11/2016-03-11-you-mvpmo-shi-yin-qi-de-[?]-xie-si-kao/" itemprop="commentsCount"></span>
+                <a href="/2017/03/28/NestedScrolling滑动/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/28/NestedScrolling滑动/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -279,7 +282,7 @@
 
           
           
-             <span id="/2016/03/11/2016-03-11-you-mvpmo-shi-yin-qi-de-[?]-xie-si-kao/" class="leancloud_visitors" data-flag-title="由MVP模式引起的一些思考">
+             <span id="/2017/03/28/NestedScrolling滑动/" class="leancloud_visitors" data-flag-title="NestedScrollView 嵌套ViewPager 在嵌套 RecyclerView">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -300,7 +303,22 @@
       
 
       
-        
+        <h3 id="NestedScrollView-嵌套ViewPager-在嵌套-RecyclerView"><a href="#NestedScrollView-嵌套ViewPager-在嵌套-RecyclerView" class="headerlink" title="NestedScrollView 嵌套ViewPager 在嵌套 RecyclerView"></a>NestedScrollView 嵌套ViewPager 在嵌套 RecyclerView</h3><p>根据业务的需要, 设想了一种NestedScrollView中 嵌套ViewPager, 在ViewPager中继续嵌套RecyclerView，然而当RecyclerView包含多个ItemType时,左右滑动ViewPager时就会产生问题。</p>
+<p>于是换成一种NestedScrollView 包含多个RecyclerView, 实现不同的布局</p>
+<h3 id="关于截断"><a href="#关于截断" class="headerlink" title="关于截断"></a>关于截断</h3><pre><code>android:focusable=&quot;true&quot;  
+android:focusableInTouchMode=&quot;true&quot;
+</code></pre><p>该属性设置可以截断子级控件的默认行为,比如子控件EditText自动获取焦点,关闭键盘, 关闭键盘也可以使用下面这方法:</p>
+<pre><code>EditText对象的clearFocus();
+InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE); 
+imm.hideSoftInputFromWindow(editMsgView.getWindowToken(), 0);（关闭软键盘。。。）
+</code></pre><p>NestedScrollView嵌套RecyclerView时,RecyclerView 自动指向自己的第一项,此时我们就可以使用</p>
+<pre><code>android:focusable=&quot;true&quot;  
+android:focusableInTouchMode=&quot;true&quot;
+</code></pre><p>截断该行为,从NestedScrollView最开始的地方显示。</p>
+<h3 id="关于NestedScrollView-嵌套RecyclerView"><a href="#关于NestedScrollView-嵌套RecyclerView" class="headerlink" title="关于NestedScrollView 嵌套RecyclerView"></a>关于NestedScrollView 嵌套RecyclerView</h3><p>对于RecyclerView 的adapter中的Item高度, 要设置wrap_content。</p>
+<h4 id="滑动问题"><a href="#滑动问题" class="headerlink" title="滑动问题"></a>滑动问题</h4><p>1)recyclerview在support library 23.2.0 (or above)以上<br>2)recyclerview高度设置wrap_content<br>3)recyclerView.setNestedScrollingEnabled(false)</p>
+<p>onMeasure 中是绘制view的动作, 一般在其中可对于item进行计算.</p>
+
       
     </div>
 
@@ -317,17 +335,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/04/2016-03-04-android-studio-git-push-fail/" rel="next" title="android studio git push fail">
-                <i class="fa fa-chevron-left"></i> android studio git push fail
+              <a href="/2017/01/02/2016年终总结/" rel="next" title="2016年度个人工作总结报告">
+                <i class="fa fa-chevron-left"></i> 2016年度个人工作总结报告
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/03/16/2016-03-16-lambdabiao-da-shi-de-shi-yong/" rel="prev" title="lambda表达式的使用">
-                lambda表达式的使用 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -356,8 +370,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/03/11/2016-03-11-you-mvpmo-shi-yin-qi-de-[?]-xie-si-kao/"
-           data-title="由MVP模式引起的一些思考" data-url="http://tianyejia.net/2016/03/11/2016-03-11-you-mvpmo-shi-yin-qi-de-[?]-xie-si-kao/">
+      <div class="ds-thread" data-thread-key="2017/03/28/NestedScrolling滑动/"
+           data-title="NestedScrollView 嵌套ViewPager 在嵌套 RecyclerView" data-url="http://tianyejia.net/2017/03/28/NestedScrolling滑动/">
       </div>
     
   </div>
@@ -439,7 +453,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#NestedScrollView-嵌套ViewPager-在嵌套-RecyclerView"><span class="nav-number">1.</span> <span class="nav-text">NestedScrollView 嵌套ViewPager 在嵌套 RecyclerView</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于截断"><span class="nav-number">2.</span> <span class="nav-text">关于截断</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于NestedScrollView-嵌套RecyclerView"><span class="nav-number">3.</span> <span class="nav-text">关于NestedScrollView 嵌套RecyclerView</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#滑动问题"><span class="nav-number">3.1.</span> <span class="nav-text">滑动问题</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

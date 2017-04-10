@@ -247,6 +247,286 @@
             
               
                 
+                <a class="post-title-link" href="/2016/08/04/Corodova源码分析值CorodovaWebView/" itemprop="url">
+                  Corodova源码分析之CorodovaWebView
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-04T17:14:42+08:00" content="2016-08-04">
+              2016-08-04
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/04/Corodova源码分析值CorodovaWebView/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/04/Corodova源码分析值CorodovaWebView/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/08/04/Corodova源码分析值CorodovaWebView/" class="leancloud_visitors" data-flag-title="Corodova源码分析之CorodovaWebView">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <pre><code>该分析基于Corodova 6.3.0
+</code></pre><p>CordovaWebViewImpl继承自CordovaWebView。该类主要用于Cordova中WebView的交互处理。<br>先看一下他的成员变量。</p>
+<pre><code>public static final String TAG = &quot;CordovaWebViewImpl&quot;;
+
+private PluginManager pluginManager;
+
+protected final CordovaWebViewEngine engine;
+private CordovaInterface cordova;
+
+// Flag to track that a loadUrl timeout occurred
+private int loadUrlTimeout = 0;
+
+private CordovaResourceApi resourceApi;
+private CordovaPreferences preferences;
+private CoreAndroid appPlugin;
+private NativeToJsMessageQueue nativeToJsMessageQueue;
+private EngineClient engineClient = new EngineClient();
+private boolean hasPausedEver;
+
+// The URL passed to loadUrl(), not necessarily the URL of the current page.
+String loadedUrl;
+
+/** custom view created by the browser (a video player for example) */
+private View mCustomView;
+private WebChromeClient.CustomViewCallback mCustomViewCallback;
+
+private Set&lt;Integer&gt; boundKeyCodes = new HashSet&lt;Integer&gt;();
+</code></pre><p>PluginManager: 对于插件的管理,有对插件的存取，他的主要方法为exec() ：</p>
+<pre><code>public void exec(final String service, final String action, final String callbackId, final String rawArgs) {
+    CordovaPlugin plugin = getPlugin(service);
+    if (plugin == null) {
+        Log.d(TAG, &quot;exec() call to unknown plugin: &quot; + service);
+        PluginResult cr = new PluginResult(PluginResult.Status.CLASS_NOT_FOUND_EXCEPTION);
+        app.sendPluginResult(cr, callbackId);
+        return;
+    }
+    CallbackContext callbackContext = new CallbackContext(callbackId, app);
+    try {
+        long pluginStartTime = System.currentTimeMillis();
+        boolean wasValidAction = plugin.execute(action, rawArgs, callbackContext);
+        long duration = System.currentTimeMillis() - pluginStartTime;
+
+        if (duration &gt; SLOW_EXEC_WARNING_THRESHOLD) {
+            Log.w(TAG, &quot;THREAD WARNING: exec() call to &quot; + service + &quot;.&quot; + action + &quot; blocked the main thread for &quot; + duration + &quot;ms. Plugin should use CordovaInterface.getThreadPool().&quot;);
+        }
+        if (!wasValidAction) {
+            PluginResult cr = new PluginResult(PluginResult.Status.INVALID_ACTION);
+            callbackContext.sendPluginResult(cr);
+        }
+    } catch (JSONException e) {
+        PluginResult cr = new PluginResult(PluginResult.Status.JSON_EXCEPTION);
+        callbackContext.sendPluginResult(cr);
+    } catch (Exception e) {
+        Log.e(TAG, &quot;Uncaught exception from plugin&quot;, e);
+        callbackContext.error(e.getMessage());
+    }
+}
+</code></pre><p>CordovaInterface…    </p>
+<p>CordovaInterface,<br>CorodvaResourceApi: 对于资源的原生调用<br>CorodvaPreferences, </p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/08/04/Cordova-源码分析之CordovaActivity/" itemprop="url">
+                  Cordova 源码分析之CordovaActivity
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-04T10:56:38+08:00" content="2016-08-04">
+              2016-08-04
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/04/Cordova-源码分析之CordovaActivity/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/04/Cordova-源码分析之CordovaActivity/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/08/04/Cordova-源码分析之CordovaActivity/" class="leancloud_visitors" data-flag-title="Cordova 源码分析之CordovaActivity">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <pre><code>基于cordova version 6.3.0
+</code></pre><p><a href="http://baike.baidu.com/link?url=Qwgc149_vx_kJMynQfszVV9MuVOAcwxnNmTRt_7zBnI8VW0-uIclwCSDpBM9J7agsrj4XQXMvaVyOfUlHj16J_">Cordova</a> 是一个能够创建android、iOS等操作系统的跨平台的项目.</p>
+<h3 id="一、创建与安装-mac环境"><a href="#一、创建与安装-mac环境" class="headerlink" title="一、创建与安装(mac环境)"></a>一、创建与安装(mac环境)</h3><p>安装:</p>
+<pre><code>sudo npm install -g cordova    
+</code></pre><p>创建项目：</p>
+<pre><code>sudo create TestDemo com.tianyejia.testdemo Test
+</code></pre><p>其中 TestDemo 就是在你执行命令的目录下面创建一个文件夹作为你的项目目录，<br>com.tianyejia.testdemo 就是你的包名， Test 就是你的项目名称。</p>
+<p>添加平台：</p>
+<pre><code>sudo cordova platform add android
+sudo cordova platform add ios
+</code></pre><p>等待一段时间，项目就创建好了。
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/08/04/Cordova-源码分析之CordovaActivity/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/06/24/关于Swift-3的新特性/" itemprop="url">
                   关于Swift 3的新特性
                 </a>
@@ -1099,230 +1379,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/04/14/初学python/" itemprop="url">
-                  初学python
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-14T21:43:43+08:00" content="2016-04-14">
-              2016-04-14
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/04/14/初学python/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/14/初学python/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/04/14/初学python/" class="leancloud_visitors" data-flag-title="初学python">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>前言：一直就很想学好python，有机会就好好抓住它</p>
-<p>##1. 第一课<br>linus说过的一句话:</p>
-<pre><code>Talk is cheap. Show me the code
-</code></pre><p>就从这个网站：<a href="https://github.com/Show-Me-the-Code/show-me-the-code[](https://github.com/Show-Me-the-Code/show-me-the-code" target="_blank" rel="external">https://github.com/Show-Me-the-Code/show-me-the-code[](https://github.com/Show-Me-the-Code/show-me-the-code</a>) 开始.</p>
-<pre><code>第 0001 题：做为 Apple Store App 独立开发者，你要搞限时促销，为你的应用生成激活码（或者优惠券），使用 Python 如何生成 200 个激活码（或者优惠券）？
-</code></pre><p>由于刚看完语法，选择直接抄其代码。由于没有PIL Module，于是云行：</p>
-<pre><code>pip install PIL
-</code></pre><p>报错：</p>
-<pre><code>Reading http://effbot.org/downloads/#Imaging
-No local packages or download links found for pil
-</code></pre><p>找了很久的原因终于在这个网站<a href="http://stackoverflow.com/questions/994281/is-the-python-imaging-library-not-available-on-pypi-or-am-i-missing-something" target="_blank" rel="external"></a>解决的办法<br>    easy_install -f <a href="http://www.pythonware.com/products/pil/" target="_blank" rel="external">http://www.pythonware.com/products/pil/</a> Imaging</p>
-<p>然而还是得到一堆warnning，不管它，继续抄代码。修改了很多次，终于成功了。</p>
-<p><strong>总结下</strong>: python 作为动态语言，相对于之前熟悉的静态语言，很多时候不能提供方法推断，有点让人恐慌。python 拥有非常多的包，这让习惯了严谨的语言人有写不习惯，因为也许很多时候，你需要的仅仅是去找相应的包就可以。</p>
-<p><strong>下面是这个程序的成果：</strong></p>
-<p><img src="http://7xrir6.com1.z0.glb.clouddn.com/00.jpg" alt=""><br><img src="http://7xrir6.com1.z0.glb.clouddn.com/%E8%92%82%E6%B3%95.jpg" alt=""></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/04/11/Android之Activity的使用/" itemprop="url">
-                  Android之Activity的使用
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-11T17:57:39+08:00" content="2016-04-11">
-              2016-04-11
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/04/11/Android之Activity的使用/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/11/Android之Activity的使用/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/04/11/Android之Activity的使用/" class="leancloud_visitors" data-flag-title="Android之Activity的使用">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>前言:很多知识看一眼就懂了，但也过一会就忘记了。<br>Activity:</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1368,7 +1424,7 @@ No local packages or download links found for pil
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">34</span>
+              <span class="site-state-item-count">36</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1410,7 +1466,7 @@ No local packages or download links found for pil
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2016</span>
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

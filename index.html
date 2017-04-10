@@ -247,6 +247,241 @@
             
               
                 
+                <a class="post-title-link" href="/2017/03/28/NestedScrolling滑动/" itemprop="url">
+                  NestedScrollView 嵌套ViewPager 在嵌套 RecyclerView
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-03-28T17:27:50+08:00" content="2017-03-28">
+              2017-03-28
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/03/28/NestedScrolling滑动/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/28/NestedScrolling滑动/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/03/28/NestedScrolling滑动/" class="leancloud_visitors" data-flag-title="NestedScrollView 嵌套ViewPager 在嵌套 RecyclerView">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="NestedScrollView-嵌套ViewPager-在嵌套-RecyclerView"><a href="#NestedScrollView-嵌套ViewPager-在嵌套-RecyclerView" class="headerlink" title="NestedScrollView 嵌套ViewPager 在嵌套 RecyclerView"></a>NestedScrollView 嵌套ViewPager 在嵌套 RecyclerView</h3><p>根据业务的需要, 设想了一种NestedScrollView中 嵌套ViewPager, 在ViewPager中继续嵌套RecyclerView，然而当RecyclerView包含多个ItemType时,左右滑动ViewPager时就会产生问题。</p>
+<p>于是换成一种NestedScrollView 包含多个RecyclerView, 实现不同的布局</p>
+<h3 id="关于截断"><a href="#关于截断" class="headerlink" title="关于截断"></a>关于截断</h3><pre><code>android:focusable=&quot;true&quot;  
+android:focusableInTouchMode=&quot;true&quot;
+</code></pre><p>该属性设置可以截断子级控件的默认行为,比如子控件EditText自动获取焦点,关闭键盘, 关闭键盘也可以使用下面这方法:</p>
+<pre><code>EditText对象的clearFocus();
+InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE); 
+imm.hideSoftInputFromWindow(editMsgView.getWindowToken(), 0);（关闭软键盘。。。）
+</code></pre><p>NestedScrollView嵌套RecyclerView时,RecyclerView 自动指向自己的第一项,此时我们就可以使用</p>
+<pre><code>android:focusable=&quot;true&quot;  
+android:focusableInTouchMode=&quot;true&quot;
+</code></pre><p>截断该行为,从NestedScrollView最开始的地方显示。</p>
+<h3 id="关于NestedScrollView-嵌套RecyclerView"><a href="#关于NestedScrollView-嵌套RecyclerView" class="headerlink" title="关于NestedScrollView 嵌套RecyclerView"></a>关于NestedScrollView 嵌套RecyclerView</h3><p>对于RecyclerView 的adapter中的Item高度, 要设置wrap_content。</p>
+<h4 id="滑动问题"><a href="#滑动问题" class="headerlink" title="滑动问题"></a>滑动问题</h4><p>1)recyclerview在support library 23.2.0 (or above)以上<br>2)recyclerview高度设置wrap_content<br>3)recyclerView.setNestedScrollingEnabled(false)</p>
+<p>onMeasure 中是绘制view的动作, 一般在其中可对于item进行计算.</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/01/02/2016年终总结/" itemprop="url">
+                  2016年度个人工作总结报告
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-01-02T16:52:06+08:00" content="2017-01-02">
+              2017-01-02
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/01/02/2016年终总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/02/2016年终总结/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/01/02/2016年终总结/" class="leancloud_visitors" data-flag-title="2016年度个人工作总结报告">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>时间飞逝，2016年就这样过去了。</p>
+<p>这半年多的时间里，我的工作主要是维护易起行android项目,保持项目的活力。</p>
+<p>从开始使用GA，进行android、iOS端的数据统计。到后来与营销部的同事讨论起数据的准确性，并不断优化。</p>
+<p>从开始的不知cordova为何物，到后来慢慢熟悉，并阅读框架源码。在前端的插件在框架下无法使用时,通过修改源码,使其能够兼容我们的cordova框架,让插件也能够正常使用。</p>
+<p>在我们项目随着业务不断扩大,原有旧版本框架已很难继续维护时,能及时的升级我们的cordova框架到最新版本,让版本平缓的过度升级。</p>
+<p>在后来丰富我们的项目,使其增加更多的native特性,满足业务需求。</p>
+<p>Corodva作为一个跨平台的解决方案，它是我们项目的起始点。它能使版本的迭代更加快速,与backbone框架的结合也使项目的mvc结构更清晰,项目的侵入性也更小。但作为几年前的跨平台解决方案，它存在不少问题，如代码量的巨大,速度慢,不好的使用体验(特别在低端机型)。</p>
+<p>关注最近的移动端开发就发现,混合开发将成为常态。其开发周期与版本迭代能力不言而喻。而其中的佼佼者就是react-native,其次是阿里的weex(weex还很不成熟)。</p>
+<p>在领导的安排下学习RN, 并尝试开发Demo。其近乎原生的体验,以及相对cordova少不少的代码,体验感觉更好。RN非常适合中小型项目。（但仍有不少坑(目前版本为0.39)）。</p>
+<p>很荣幸能够进入广之旅, 并与大家一同共事、成长。</p>
+<p>工作就像场马拉松,2016的结束只是路途中的一个拐点。</p>
+<p>2017共勉。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/12/20/技术的真理/" itemprop="url">
                   技术的真理
                 </a>
@@ -1128,286 +1363,6 @@ sudo: apktool: command not found
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/04/Corodova源码分析值CorodovaWebView/" itemprop="url">
-                  Corodova源码分析之CorodovaWebView
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-04T17:14:42+08:00" content="2016-08-04">
-              2016-08-04
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/08/04/Corodova源码分析值CorodovaWebView/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/04/Corodova源码分析值CorodovaWebView/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/08/04/Corodova源码分析值CorodovaWebView/" class="leancloud_visitors" data-flag-title="Corodova源码分析之CorodovaWebView">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <pre><code>该分析基于Corodova 6.3.0
-</code></pre><p>CordovaWebViewImpl继承自CordovaWebView。该类主要用于Cordova中WebView的交互处理。<br>先看一下他的成员变量。</p>
-<pre><code>public static final String TAG = &quot;CordovaWebViewImpl&quot;;
-
-private PluginManager pluginManager;
-
-protected final CordovaWebViewEngine engine;
-private CordovaInterface cordova;
-
-// Flag to track that a loadUrl timeout occurred
-private int loadUrlTimeout = 0;
-
-private CordovaResourceApi resourceApi;
-private CordovaPreferences preferences;
-private CoreAndroid appPlugin;
-private NativeToJsMessageQueue nativeToJsMessageQueue;
-private EngineClient engineClient = new EngineClient();
-private boolean hasPausedEver;
-
-// The URL passed to loadUrl(), not necessarily the URL of the current page.
-String loadedUrl;
-
-/** custom view created by the browser (a video player for example) */
-private View mCustomView;
-private WebChromeClient.CustomViewCallback mCustomViewCallback;
-
-private Set&lt;Integer&gt; boundKeyCodes = new HashSet&lt;Integer&gt;();
-</code></pre><p>PluginManager: 对于插件的管理,有对插件的存取，他的主要方法为exec() ：</p>
-<pre><code>public void exec(final String service, final String action, final String callbackId, final String rawArgs) {
-    CordovaPlugin plugin = getPlugin(service);
-    if (plugin == null) {
-        Log.d(TAG, &quot;exec() call to unknown plugin: &quot; + service);
-        PluginResult cr = new PluginResult(PluginResult.Status.CLASS_NOT_FOUND_EXCEPTION);
-        app.sendPluginResult(cr, callbackId);
-        return;
-    }
-    CallbackContext callbackContext = new CallbackContext(callbackId, app);
-    try {
-        long pluginStartTime = System.currentTimeMillis();
-        boolean wasValidAction = plugin.execute(action, rawArgs, callbackContext);
-        long duration = System.currentTimeMillis() - pluginStartTime;
-
-        if (duration &gt; SLOW_EXEC_WARNING_THRESHOLD) {
-            Log.w(TAG, &quot;THREAD WARNING: exec() call to &quot; + service + &quot;.&quot; + action + &quot; blocked the main thread for &quot; + duration + &quot;ms. Plugin should use CordovaInterface.getThreadPool().&quot;);
-        }
-        if (!wasValidAction) {
-            PluginResult cr = new PluginResult(PluginResult.Status.INVALID_ACTION);
-            callbackContext.sendPluginResult(cr);
-        }
-    } catch (JSONException e) {
-        PluginResult cr = new PluginResult(PluginResult.Status.JSON_EXCEPTION);
-        callbackContext.sendPluginResult(cr);
-    } catch (Exception e) {
-        Log.e(TAG, &quot;Uncaught exception from plugin&quot;, e);
-        callbackContext.error(e.getMessage());
-    }
-}
-</code></pre><p>CordovaInterface…    </p>
-<p>CordovaInterface,<br>CorodvaResourceApi: 对于资源的原生调用<br>CorodvaPreferences, </p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/04/Cordova-源码分析之CordovaActivity/" itemprop="url">
-                  Cordova 源码分析之CordovaActivity
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-04T10:56:38+08:00" content="2016-08-04">
-              2016-08-04
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/08/04/Cordova-源码分析之CordovaActivity/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/04/Cordova-源码分析之CordovaActivity/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/08/04/Cordova-源码分析之CordovaActivity/" class="leancloud_visitors" data-flag-title="Cordova 源码分析之CordovaActivity">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <pre><code>基于cordova version 6.3.0
-</code></pre><p><a href="http://baike.baidu.com/link?url=Qwgc149_vx_kJMynQfszVV9MuVOAcwxnNmTRt_7zBnI8VW0-uIclwCSDpBM9J7agsrj4XQXMvaVyOfUlHj16J_">Cordova</a> 是一个能够创建android、iOS等操作系统的跨平台的项目.</p>
-<h3 id="一、创建与安装-mac环境"><a href="#一、创建与安装-mac环境" class="headerlink" title="一、创建与安装(mac环境)"></a>一、创建与安装(mac环境)</h3><p>安装:</p>
-<pre><code>sudo npm install -g cordova    
-</code></pre><p>创建项目：</p>
-<pre><code>sudo create TestDemo com.tianyejia.testdemo Test
-</code></pre><p>其中 TestDemo 就是在你执行命令的目录下面创建一个文件夹作为你的项目目录，<br>com.tianyejia.testdemo 就是你的包名， Test 就是你的项目名称。</p>
-<p>添加平台：</p>
-<pre><code>sudo cordova platform add android
-sudo cordova platform add ios
-</code></pre><p>等待一段时间，项目就创建好了。
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/04/Cordova-源码分析之CordovaActivity/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1453,7 +1408,7 @@ sudo cordova platform add ios
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">34</span>
+              <span class="site-state-item-count">36</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1495,7 +1450,7 @@ sudo cordova platform add ios
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2016</span>
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
