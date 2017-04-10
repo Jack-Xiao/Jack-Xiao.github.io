@@ -305,24 +305,13 @@
 
       
         
-          
-            <h3 id="NestedScrollView-嵌套ViewPager-在嵌套-RecyclerView"><a href="#NestedScrollView-嵌套ViewPager-在嵌套-RecyclerView" class="headerlink" title="NestedScrollView 嵌套ViewPager 在嵌套 RecyclerView"></a>NestedScrollView 嵌套ViewPager 在嵌套 RecyclerView</h3><p>根据业务的需要, 设想了一种NestedScrollView中 嵌套ViewPager, 在ViewPager中继续嵌套RecyclerView，然而当RecyclerView包含多个ItemType时,左右滑动ViewPager时就会产生问题。</p>
-<p>于是换成一种NestedScrollView 包含多个RecyclerView, 实现不同的布局</p>
-<h3 id="关于截断"><a href="#关于截断" class="headerlink" title="关于截断"></a>关于截断</h3><pre><code>android:focusable=&quot;true&quot;  
-android:focusableInTouchMode=&quot;true&quot;
-</code></pre><p>该属性设置可以截断子级控件的默认行为,比如子控件EditText自动获取焦点,关闭键盘, 关闭键盘也可以使用下面这方法:</p>
-<pre><code>EditText对象的clearFocus();
-InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE); 
-imm.hideSoftInputFromWindow(editMsgView.getWindowToken(), 0);（关闭软键盘。。。）
-</code></pre><p>NestedScrollView嵌套RecyclerView时,RecyclerView 自动指向自己的第一项,此时我们就可以使用</p>
-<pre><code>android:focusable=&quot;true&quot;  
-android:focusableInTouchMode=&quot;true&quot;
-</code></pre><p>截断该行为,从NestedScrollView最开始的地方显示。</p>
-<h3 id="关于NestedScrollView-嵌套RecyclerView"><a href="#关于NestedScrollView-嵌套RecyclerView" class="headerlink" title="关于NestedScrollView 嵌套RecyclerView"></a>关于NestedScrollView 嵌套RecyclerView</h3><p>对于RecyclerView 的adapter中的Item高度, 要设置wrap_content。</p>
-<h4 id="滑动问题"><a href="#滑动问题" class="headerlink" title="滑动问题"></a>滑动问题</h4><p>1)recyclerview在support library 23.2.0 (or above)以上<br>2)recyclerview高度设置wrap_content<br>3)recyclerView.setNestedScrollingEnabled(false)</p>
-<p>onMeasure 中是绘制view的动作, 一般在其中可对于item进行计算.</p>
-
-          
+          <h3 id="NestedScrollView-嵌套ViewPager-在嵌套-RecyclerView"><a href="#NestedScrollView-嵌套ViewPager-在嵌套-RecyclerView" class="headerlink" title="NestedScrollView 嵌套ViewPager 在嵌套 RecyclerView"></a>NestedScrollView 嵌套ViewPager 在嵌套 RecyclerView</h3><p>根据业务的需要, 设想了一种NestedScrollView中 嵌套ViewPager, 在ViewPager中继续嵌套RecyclerView，然而当RecyclerView包含多个ItemType时,左右滑动ViewPager时就会产生问题。</p>
+<p>于是换成一种NestedScrollView 包含多个RecyclerView, 实现不同的布局<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/03/28/NestedScrolling滑动/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
