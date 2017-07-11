@@ -1,0 +1,1176 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="google0f0bd5e5891a7105" />
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="tianyejia" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="对于自己认定的事情,要坚持。
+Realm 是一个移动数据库，可运行于手机、平板和可穿戴设备之上。可以让你的应用更快速，带来难以想象的体验。其目标是为了代替 CoreData 和 SQLite 数据库。
+易用Ream 不是在SQLite基础上的ORM，它有自己的数据查询引擎。并且十分容易使用。
+跨平台Realm 支持 iOS &amp;amp; OS X (Objective‑C &amp;amp; Swift)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Realm的简单使用">
+<meta property="og:url" content="http://tianyejia.net/2017/07/12/Realm的简单使用/index.html">
+<meta property="og:site_name" content="给时光以生命">
+<meta property="og:description" content="对于自己认定的事情,要坚持。
+Realm 是一个移动数据库，可运行于手机、平板和可穿戴设备之上。可以让你的应用更快速，带来难以想象的体验。其目标是为了代替 CoreData 和 SQLite 数据库。
+易用Ream 不是在SQLite基础上的ORM，它有自己的数据查询引擎。并且十分容易使用。
+跨平台Realm 支持 iOS &amp;amp; OS X (Objective‑C &amp;amp; Swift)">
+<meta property="og:updated_time" content="2017-07-11T20:45:29.324Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Realm的简单使用">
+<meta name="twitter:description" content="对于自己认定的事情,要坚持。
+Realm 是一个移动数据库，可运行于手机、平板和可穿戴设备之上。可以让你的应用更快速，带来难以想象的体验。其目标是为了代替 CoreData 和 SQLite 数据库。
+易用Ream 不是在SQLite基础上的ORM，它有自己的数据查询引擎。并且十分容易使用。
+跨平台Realm 支持 iOS &amp;amp; OS X (Objective‑C &amp;amp; Swift)">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> Realm的简单使用 | 给时光以生命 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?409539fd29780a177452384bc846716f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=55248887";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">给时光以生命</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'xGEPPerz-QLS-XKNDR_4','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Realm的简单使用
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-07-12T04:05:25+08:00" content="2017-07-12">
+              2017-07-12
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/07/12/Realm的简单使用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/07/12/Realm的简单使用/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/07/12/Realm的简单使用/" class="leancloud_visitors" data-flag-title="Realm的简单使用">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <pre><code>对于自己认定的事情,要坚持。
+</code></pre><p>Realm 是一个移动数据库，可运行于手机、平板和可穿戴设备之上。可以让你的应用更快速，带来难以想象的体验。其目标是为了代替 CoreData 和 SQLite 数据库。</p>
+<h3 id="易用"><a href="#易用" class="headerlink" title="易用"></a>易用</h3><p>Ream 不是在SQLite基础上的ORM，它有自己的数据查询引擎。并且十分容易使用。</p>
+<h3 id="跨平台"><a href="#跨平台" class="headerlink" title="跨平台"></a>跨平台</h3><p>Realm 支持 iOS &amp; OS X (Objective‑C &amp; Swift) &amp; Android。我们可以在这些平台上共享Realm数据库文件，并且上层逻辑可以不用任何改动的情况下实现移植。</p>
+<h3 id="高级"><a href="#高级" class="headerlink" title="高级"></a>高级</h3><p>Ream支持加密，格式化查询，易于移植，支持JSON，流式api，数据变更通知等高级特性</p>
+<h3 id="Realm的使用条件"><a href="#Realm的使用条件" class="headerlink" title="Realm的使用条件"></a>Realm的使用条件</h3><ul>
+<li>目前不支持Android以外的Java</li>
+<li>Android Studio &gt;= 1.5.1</li>
+<li>较新的Android SDK版本</li>
+<li>JDK version &gt;=7.</li>
+<li>支持API 9(Android 2.3)以及之后的版本</li>
+</ul>
+<h2 id="一-加入依赖关系"><a href="#一-加入依赖关系" class="headerlink" title="一.加入依赖关系"></a>一.加入依赖关系</h2><p>1、在project的build中加入依赖</p>
+<pre><code>    buildscript {
+       repositories {
+            jcenter()
+       }
+      dependencies {
+      classpath &quot;io.realm:realm-gradle-plugin:2.2.1&quot;
+      }
+}
+</code></pre><p>2、 在module中加入</p>
+<pre><code>apply plugin: &apos;realm-android
+</code></pre><h2 id="二-创建和初始化"><a href="#二-创建和初始化" class="headerlink" title="二.创建和初始化"></a>二.创建和初始化</h2><p>####1、使用RealmConfiguration配置Realm</p>
+<p>创建数据库时首先需要调用Realm.init()方法，否则系统报错：Java.lang.IllegalStateException: Call <code>Realm.init(Context)</code> before creating a RealmConfiguration<br>        数据库初始化主要工作是什么数据库的name(设置数据库的文件名称)、schemaVersion(设置当前数据库版本号，当前版本号不能小于历史版本号)、migration(数据库版本迁移)、 deleteRealmIfMigrationNeeded(版本冲突时删除原始数据库)、inMemory(在内存中持久化，关闭后自动删除)、build(创建数据库)。</p>
+<pre><code>    public static Realm getRealm(Context context)
+{
+byte[] key = new byte[64];
+new SecureRandom().nextBytes(key);
+Realm.init(context);
+Migration migration = new Migration();
+RealmConfiguration config = new RealmConfiguration.Builder()
+        .name(&quot;realmdb.realm&quot;) //文件名
+        .schemaVersion(0) //版本号
+        .migration(migration)//数据库版本迁移（数据库升级，当数据库中某个表添加字段或者删除字段）
+        .deleteRealmIfMigrationNeeded()//声明版本冲突时自动删除原数据库(当调用了该方法时，上面的方法将失效)。
+        .build();//创建
+return Realm.getInstance(config);
+}
+</code></pre><p>2、 创建model</p>
+<p>创建一个类名为User的model，首先该类必须继承自RealmObject，只有这才用使用Realm来操作model生成相应的表。<br>       在Realm支持的类型有：boolean, byte, short,int,long,float, double,String, Date，byte[], RealmObject, RealmList&lt;? extends RealmObject&gt;还支持Boolean, Byte, Short, Integer, Long, Float 和 Double。但是：整数类型 short、int 和 long 都被映射到 Realm内的相同类型（实际上为 long ）。</p>
+<p>####@PrimaryKey——表示该字段是主键<br>PrimaryKey就是主键。使用@PrimaryKey来标注，字段类型必须是字符串（String）或整数（byte，short，int或long）以及它们的包装类型（Byte,Short, Integer, 或 Long）。一个model中不可以存在多个主键，使用字符串字段作为主键意味着字段被索引（注释@PrimaryKey隐式地设置注释@Index）。</p>
+<h4 id="Required——表示该字段非空"><a href="#Required——表示该字段非空" class="headerlink" title="@Required——表示该字段非空"></a>@Required——表示该字段非空</h4><p>在某些情况下，某些属性是不能为null的。使用@Required可用于用于强行要求其属性不能为空，只能用于Boolean, Byte, Short, Integer, Long, Float, Double, String, byte[] 和 Date。在其它类型属性上使用 </p>
+<h4 id="Required修饰会导致编译失败。"><a href="#Required修饰会导致编译失败。" class="headerlink" title="@Required修饰会导致编译失败。"></a>@Required修饰会导致编译失败。</h4><p>note：基本数据类型不需要使用注解 @Required，因为他们本身就不可为空。</p>
+<p>####@Ignore——表示忽略该字段<br>如果想忽略某个字段，则可以使用@Ignore修饰该字段，被秀@ignore修饰的字段在存储数据时会忽略该字段。</p>
+<p>####@Index——添加搜索索引<br>使用@index可以为字段添加搜索索引，使用索引以后使得插入的速度变慢，数据量也变得更大。但是在查询速度将变得更快，所以建议只在优化读取性能的特定情况时添加索引。</p>
+<p>支持索引：String，byte，short，int，long，boolean和Date字段。</p>
+<pre><code>public class User extends RealmObject
+{
+@PrimaryKey
+private int id;
+private int age;
+@Required
+private String name;
+public int getId()
+{
+    return id;
+}
+public void setId(int id)
+{
+    this.id = id;
+}
+public String getName()
+{
+    return name;
+}
+public void setName(String name)
+{
+    this.name = name;
+}
+private RealmList&lt;Dog&gt; dogs;
+public RealmList&lt;Dog&gt; getDogs()
+{
+    return dogs;
+}
+public void setDogs(RealmList&lt;Dog&gt; dogs)
+{
+    this.dogs = dogs;
+}
+public int getAge()
+{
+    return age;
+}
+public void setAge(int age)
+{
+    this.age = age;
+}
+}
+</code></pre><h3 id="4、增"><a href="#4、增" class="headerlink" title="4、增"></a>4、增</h3><p>写入操作需要在事务中进行，<br>     *使用executeTransaction方法来开启事务。<br>      当model没有primaryKey时，可以使用下面的方法</p>
+<pre><code>mRealm.executeTransaction(new Realm.Transaction() {
+@Override
+public void execute(Realm realm) {
+    User user = realm.createObject(User.class);
+    user.setName(&quot;Gavin&quot;);
+    user.setAge(23);
+    user.setId(1);
+   }});      
+</code></pre><p>当model有primaryKey时，则可以使用下面的方法，将对@primaryKey修饰的字段直接在创建对象是赋值(createObject(User.class,1))</p>
+<pre><code>mRealm.executeTransaction(new Realm.Transaction() {
+@Override
+public void execute(Realm realm) {
+    User user = realm.createObject(User.class，1);
+    user.setName(&quot;Gavin&quot;);
+    user.setAge(23);       
+   }});
+</code></pre><h4 id="使用copyToRealmOrUpdate或copyToRealm方法插入数据"><a href="#使用copyToRealmOrUpdate或copyToRealm方法插入数据" class="headerlink" title="使用copyToRealmOrUpdate或copyToRealm方法插入数据"></a>使用copyToRealmOrUpdate或copyToRealm方法插入数据</h4><p>当model中含有primaryKey时使用copyToRealmOrUpdate插入数据，在当前插入主键的值存在时则修改对应主键值相关的数据信息，否则插入数据。<br>       当model中不含有主键时，则使用copyToRealm。若在不含有主键的model中使用copyToRealmOrUpdate将抛异常：</p>
+<p>######java.lang.IllegalArgumentException: A RealmObject with no @PrimaryKey cannot be updated:XXXXX<br>       final User user = new User();<br>    user.setName(“李德华”);<br>    user.setUserId(“admin”);<br>    user.setAge(25);<br>    user.setId(1);</p>
+<pre><code>realm.executeTransaction(new Realm.Transaction()
+{
+    @Override
+    public void execute(Realm realm)
+    {                
+        realm.copyToRealmOrUpdate(user);
+    }
+});
+</code></pre><p> 当在model（User）中包办另外一个model例如在User中包含一个Dog模型，也可以包含一个Dog的集合<br>       还记得在之前的User数据模型中含有这么一块代码吗？这个申明表示一个User中可以包含（养）多条狗（Dog）<br>在Realm中List类型表示为RealmList。</p>
+<pre><code>private RealmList&lt;Dog&gt; dogs;
+public RealmList&lt;Dog&gt; getDogs()
+{
+    return dogs;
+}
+public void setDogs(RealmList&lt;Dog&gt; dogs)
+{
+    this.dogs = dogs;
+}       
+</code></pre><p>向数据模型（User）插入另外一个数据模型（Dog）时，可以才用如下方式（当User含有主键时采用）：</p>
+<pre><code>private void insertOrUpdateDataWithPrimaryKey()
+{
+final User user = new User();
+user.setName(&quot;李德华&quot;);
+user.setUserId(&quot;admin&quot;);
+user.setAge(25);
+user.setId(1);
+realm.executeTransaction(new Realm.Transaction()
+{
+    @Override
+    public void execute(Realm realm)
+    {
+        Dog dog1 = new Dog();
+        dog1.setId(1);
+        dog1.setAge(5);
+        dog1.setName(&quot;藏獒&quot;);
+        dogs = new RealmList&lt;Dog&gt;();
+        dogs.add(dog1);
+        user.setDogs(dogs);
+        realm.copyToRealmOrUpdate(user);
+    }
+});
+}    
+</code></pre><p>当user没有主键时使用如下方式：</p>
+<pre><code>realm.executeTransaction(new Realm.Transaction()
+{
+@Override    
+public void execute(Realm realm) {
+    User user = realm.createObject(User.class);        
+    user.setName(&quot;Gain&quot;);        
+    user.setAge(23);       
+    Dog dog1 = realm.createObject(Dog.class);        
+    dog1.setAge(1);        
+    dog1.setName(&quot;二哈&quot;);        
+    user.getDogs().add(dog1);        
+    Dog dog2 = realm.createObject(Dog.class);        
+    dog2.setAge(2);        
+    dog2.setName(&quot;阿拉撕家&quot;);        
+    user.getDogs().add(dog2);    
+}
+});
+</code></pre><p>####使用异步方式进行数据插入，具体的方式如下：<br>使用异步插入，可以检测数据是否插入成功，成功后可以使用new Realm.Transaction.OnSuccess()进行监测，失败可以使用new Realm.Transaction.OnError()监测。</p>
+<pre><code>/**
+ * 异步执行
+ * 向有主键的数据表中insert或update数据
+ * 数据表中有当前主键时则执行update
+ * 否者执行insert
+ */
+private void insertOrUpdateDataWithPrimaryKeyAsync()
+{
+final User user = new User();
+user.setName(&quot;李德华&quot;);
+user.setUserId(&quot;admin&quot;);
+user.setAge(25);
+user.setId(1);
+
+task = realm.executeTransactionAsync(new Realm.Transaction()
+{
+    @Override
+    public void execute(Realm realm)
+    {
+        Dog dog1 = new Dog();
+        dog1.setId(1);
+        dog1.setAge(5);
+        dog1.setName(&quot;藏獒&quot;);
+        dogs = new RealmList&lt;Dog&gt;();
+        dogs.add(dog1);
+        user.setDogs(dogs);
+        realm.copyToRealmOrUpdate(user);
+    }
+}, new Realm.Transaction.OnSuccess()
+{
+    @Override
+    public void onSuccess()
+    {
+        Logger.d(&quot;Success&quot;);
+    }
+}, new Realm.Transaction.OnError()
+{
+    @Override
+    public void onError(Throwable error)
+    {
+        Logger.d(&quot;Error&quot;);
+    }
+});
+}
+</code></pre><p>注意：如果当Acitivity或Fragment被销毁时，在OnSuccess或OnError中执行UI操作，将导致程序奔溃 。用RealmAsyncTask .cancel();可以取消事务，在onStop中调用，避免crash</p>
+<pre><code>@Override
+protected void onStop()
+{
+super.onStop();
+if (task != null &amp;&amp; task.isCancelled())
+{
+    task.cancel();
+}
+}    
+</code></pre><h4 id="将Json数据直接插入数据库"><a href="#将Json数据直接插入数据库" class="headerlink" title="将Json数据直接插入数据库"></a>将Json数据直接插入数据库</h4><p>Realm有一个强大的功能就是将Json数据直接插入到相应的数据库，具体的代码入下：</p>
+<pre><code>/**
+ * 将Json数据添加到数据表中
+ */
+private void insertDataFromJson()
+{
+realm.executeTransaction(new Realm.Transaction()
+{
+    @Override
+    public void execute(Realm realm)
+    {
+        realm.createOrUpdateObjectFromJson(User.class, &quot;{ id: 2, age: 50, name:\&quot;sealong\&quot;,userId:\&quot;admin\&quot;,
+                      dogs:[{id:5,name:\&quot;龙骑士\&quot;,age:3},{id:6,name:\&quot;猪骑士\&quot;,age:4},{id:7,name:\&quot;马骑士\&quot;,age:5}]}&quot;);
+    }
+});
+}
+</code></pre><p>Realm 解析 JSON 时遵循如下规则：<br>1.使用包含空值（null）的 JSON 创建对象：</p>
+<p>2.对于非必须（可为空值的属性），设置其值为 null；</p>
+<p>3.对于必须（不可为空值的属性），抛出异常；</p>
+<p>4.使用包含空值（null）的 JSON 更新对象：</p>
+<p>5.对于非必须（可为空值的属性），设置其值为 null；</p>
+<p>6.对于必须（不可为空值的属性），抛出异常；</p>
+<p>7.使用不包含对应属性的 JSON： * 该属性保持不变</p>
+<p>####5.删<br>Realm的删除，包含两个步骤，首先查找到相应的数据集合，在在集合中删除相应的数据，代码如下：</p>
+<pre><code>private void deleteData()
+{    //先查找到数据    
+ final RealmResults&lt;User&gt; userList = realm.where(User.class).findAll();    
+ realm.executeTransaction(new Realm.Transaction()    
+ {        
+     @Override        
+     public void execute(Realm realm)        
+     {            
+         userList.get(4).deleteFromRealm();//删除指定位置（第4条记录）的记录
+         userList.deleteFromRealm(4);//删除指定位置（第4条记录）的记录            
+         userList.deleteFirstFromRealm(); //删除user表的第一条数据            
+         userList.deleteLastFromRealm();//删除user表的最后一条数据            
+         userList.deleteAllFromRealm();//删除user表的全部数据        
+     }    
+  });
+}
+</code></pre><p>####6.改<br>改是通过先查找到相应的数据，然后再设置需要修改的相应的信息。<br>例如修改User表中name=sealong 并且Id=2的所有对象，并将其UserId设置为user的代码如下。</p>
+<pre><code>private void dataUpdate()
+{
+realm.executeTransaction(new Realm.Transaction()
+{
+    @Override
+    public void execute(Realm realms)
+    {
+        //先查找后得到User对象
+        RealmResults&lt;User&gt; users = realm.where(User.class).equalTo(&quot;name&quot;, &quot;sealong&quot;).equalTo(&quot;id&quot;, 2).findAll();
+        for (User user : users)
+        {
+            user.setUserId(&quot;user&quot;);
+        }
+    }
+});
+}
+</code></pre><p>####7.查<br>查找常用的函数有：<br>findAll —- 查询满足条件的所有记录</p>
+<p>findAllAsync—-异步查询（当数据量较大，可能会引起ANR的时候，就可以使用findAllAsync）</p>
+<p>findFirst —- 查询第一条数据</p>
+<p>equalTo —- 根据条件查询（多次使用该函数可以实现多条件查询）</p>
+<p>sum —- 对指定字段求和。</p>
+<p>average —- 对指定字段求平均值。</p>
+<p>min —- 对指定字段求最小值。</p>
+<p>max —- 对指定字段求最大值。count : 求结果集的记录数量。</p>
+<p>findAll —- 返回结果集所有字段，返回值为<br>RealmResults队列</p>
+<p>findAllSorted —- 排序返回结果集所有字段，返回值为RealmResults队列</p>
+<p>between —- 指定字段的值在某区间内</p>
+<p>greaterThan()|lessThan()—-指定字段的值大于（小于）给定的值</p>
+<p>greaterThanOrEqualTo() &amp; lessThanOrEqualTo()—-指定字段的值大于等于（小于等于）给定的值</p>
+<p>equalTo() &amp; notEqualTo() —- 指定字段的值（不）等于</p>
+<p>contains() —-指定字段的值包含某些字符（指定字段为String）</p>
+<p>beginsWith() &amp; endsWith() —-指定字段的值以给定的值开始（结束）</p>
+<p>isNull()  &amp; isNotNull() —-指定字段的值（不）为null</p>
+<p>isEmpty() &amp; isNotEmpty() —-指定字段的值（不）为空</p>
+<pre><code>private void dataSelectUser()
+ {
+    RealmResults&lt;User&gt; users = realm.where(User.class).findAllSorted(&quot;id&quot;, Sort.DESCENDING);//按照id倒序排序
+long size = users.size();//返回数据的条数
+double average = users.average(&quot;age&quot;);//返回查询结果的中age的平均值
+long sum = users.sum(&quot;age&quot;).longValue();//返回查询结果中age的总数
+long min = users.min(&quot;age&quot;).longValue();//返回查询结果中age的最小值
+long max = users.max(&quot;age&quot;).longValue();//返回查询结果中age的最大值
+}
+</code></pre><p>####8.数据库升级<br> 当某个数据表需要加某些字段或者添加某些属性时，而且不删除之前的原始数据的情况下，需要对原始数据进行升级<br>例如需要对表删除字段age，并且需要添加一个String类型的userId 并且设置将之前表中的userId的值设置为1，同时版本号需要更新</p>
+<pre><code>public class Migration implements RealmMigration
+{
+/**
+ * 升级数据库
+ */
+@Override
+public void migrate(DynamicRealm realm, long oldVersion, long newVersion)
+{
+    RealmSchema schema = realm.getSchema();
+    if (oldVersion != newVersion)
+    {
+        RealmObjectSchema personSchema = schema.get(&quot;User&quot;);
+        //新增@Required的id
+        personSchema.addField(&quot;userId&quot;, String.class, FieldAttribute.REQUIRED)
+                .transform(new RealmObjectSchema.Function()
+                {
+                    @Override
+                    public void apply(DynamicRealmObject obj)
+                    {
+                        obj.set(&quot;userId&quot;, &quot;1&quot;);//为id设置值
+                    }
+                }).removeField(&quot;age&quot;);
+        oldVersion++;
+    }
+}
+}
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/28/NestedScrolling滑动/" rel="next" title="NestedScrollView 嵌套ViewPager 在嵌套 RecyclerView">
+                <i class="fa fa-chevron-left"></i> NestedScrollView 嵌套ViewPager 在嵌套 RecyclerView
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/07/12/Realm的简单使用/"
+           data-title="Realm的简单使用" data-url="http://tianyejia.net/2017/07/12/Realm的简单使用/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="xiao jiang" />
+          <p class="site-author-name" itemprop="name">xiao jiang</p>
+          <p class="site-description motion-element" itemprop="description">每一个不曾起舞的日子都是对生命的辜负。</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">37</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#易用"><span class="nav-number">1.</span> <span class="nav-text">易用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#跨平台"><span class="nav-number">2.</span> <span class="nav-text">跨平台</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高级"><span class="nav-number">3.</span> <span class="nav-text">高级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Realm的使用条件"><span class="nav-number">4.</span> <span class="nav-text">Realm的使用条件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一-加入依赖关系"><span class="nav-number"></span> <span class="nav-text">一.加入依赖关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二-创建和初始化"><span class="nav-number"></span> <span class="nav-text">二.创建和初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Required——表示该字段非空"><span class="nav-number">0.1.</span> <span class="nav-text">@Required——表示该字段非空</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Required修饰会导致编译失败。"><span class="nav-number">0.2.</span> <span class="nav-text">@Required修饰会导致编译失败。</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、增"><span class="nav-number">1.</span> <span class="nav-text">4、增</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用copyToRealmOrUpdate或copyToRealm方法插入数据"><span class="nav-number">1.1.</span> <span class="nav-text">使用copyToRealmOrUpdate或copyToRealm方法插入数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#将Json数据直接插入数据库"><span class="nav-number">1.2.</span> <span class="nav-text">将Json数据直接插入数据库</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xiao jiang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+
+
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"tianyejia"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("5bvhH2j9KCMIS01eszQ5elmA-gzGzoHsz", "71sQ2r5ELbN53udv7wiWvHPl");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>
