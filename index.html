@@ -308,7 +308,7 @@
           
             <pre><code>当你被面临的问题困住的时候, 你就能感同身受的体会到那些技术的巨
 大优越性了, git 就是这样的技术
-</code></pre><p>####区<br>git有两个区, 暂存区, 工作区。</p>
+</code></pre><h4 id="区"><a href="#区" class="headerlink" title="区"></a>区</h4><p>git有两个区, 暂存区, 工作区。</p>
 <ul>
 <li>工作区就是直接写代码,修修改改的地方。</li>
 <li><p>暂存区就是add . 命令所存放文件的地方。也是</p>
@@ -317,8 +317,7 @@ git stash apply --把暂存区内容返回到工作区
 git stash pop --把暂存区内容返回到工作区,并删除原有暂存区内容。
 </code></pre></li>
 </ul>
-<p>####分支</p>
-<ol>
+<h4 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h4><ol>
 <li><p>创建分支</p>
 <pre><code>git branch &lt;branch&gt;
 </code></pre></li>
@@ -334,8 +333,7 @@ git stash pop --把暂存区内容返回到工作区,并删除原有暂存区内
 <pre><code>git branch -d &lt;branch&gt;        
 </code></pre></li>
 </ol>
-<p>####远程仓储</p>
-<pre><code>git push origin dev -- 推送对应的远程分支
+<h4 id="远程仓储"><a href="#远程仓储" class="headerlink" title="远程仓储"></a>远程仓储</h4><pre><code>git push origin dev -- 推送对应的远程分支
 
 $ git checkout -b dev origin/dev  (把远程存在的分支，clone 到本地)
 
