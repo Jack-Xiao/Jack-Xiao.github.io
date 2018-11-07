@@ -59,19 +59,67 @@
 
 
 
-<meta name="description" content="今天有同事问起lambda的用法，以前总是有点似懂非懂。重新看过资料后，发现明白了些。记录下心得，也分享给初学感觉困难的人。
-###什么是lambda表达式">
+<meta name="description" content="准确搜索
+ 使用””进行完全匹配
+&amp;quot;keyword&amp;quot;
+
+排除关键字
+ 关键字 -排除关键字
+keyword -xx     
+
+使用*进行模糊匹配
+我还 *不能够
+
+
+
+使用site指定网站
+深入理解android site:pan.baidu.com
+
+使用filetype指定文件类型
+深入理解android filetype:pdf">
 <meta property="og:type" content="article">
-<meta property="og:title" content="lambda表达式的使用">
-<meta property="og:url" content="http://tianyejia.net/2016/03/16/2016-03-16-lambdabiao-da-shi-de-shi-yong/index.html">
+<meta property="og:title" content="google 搜索技巧">
+<meta property="og:url" content="http://tianyejia.net/2018/11/07/google-搜索技巧/index.html">
 <meta property="og:site_name" content="给时光以生命">
-<meta property="og:description" content="今天有同事问起lambda的用法，以前总是有点似懂非懂。重新看过资料后，发现明白了些。记录下心得，也分享给初学感觉困难的人。
-###什么是lambda表达式">
-<meta property="og:updated_time" content="2016-03-17T03:41:14.000Z">
+<meta property="og:description" content="准确搜索
+ 使用””进行完全匹配
+&amp;quot;keyword&amp;quot;
+
+排除关键字
+ 关键字 -排除关键字
+keyword -xx     
+
+使用*进行模糊匹配
+我还 *不能够
+
+
+
+使用site指定网站
+深入理解android site:pan.baidu.com
+
+使用filetype指定文件类型
+深入理解android filetype:pdf">
+<meta property="og:updated_time" content="2018-11-07T01:07:22.816Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="lambda表达式的使用">
-<meta name="twitter:description" content="今天有同事问起lambda的用法，以前总是有点似懂非懂。重新看过资料后，发现明白了些。记录下心得，也分享给初学感觉困难的人。
-###什么是lambda表达式">
+<meta name="twitter:title" content="google 搜索技巧">
+<meta name="twitter:description" content="准确搜索
+ 使用””进行完全匹配
+&amp;quot;keyword&amp;quot;
+
+排除关键字
+ 关键字 -排除关键字
+keyword -xx     
+
+使用*进行模糊匹配
+我还 *不能够
+
+
+
+使用site指定网站
+深入理解android site:pan.baidu.com
+
+使用filetype指定文件类型
+深入理解android filetype:pdf">
 
 
 
@@ -89,7 +137,7 @@
   };
 </script>
 
-  <title> lambda表达式的使用 | 给时光以生命 </title>
+  <title> google 搜索技巧 | 给时光以生命 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -248,7 +296,7 @@
             
             
               
-                lambda表达式的使用
+                google 搜索技巧
               
             
           </h1>
@@ -260,8 +308,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-16T22:55:33+08:00" content="2016-03-16">
-              2016-03-16
+            <time itemprop="dateCreated" datetime="2018-11-07T08:52:40+08:00" content="2018-11-07">
+              2018-11-07
             </time>
           </span>
 
@@ -271,8 +319,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/03/16/2016-03-16-lambdabiao-da-shi-de-shi-yong/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/16/2016-03-16-lambdabiao-da-shi-de-shi-yong/" itemprop="commentsCount"></span>
+                <a href="/2018/11/07/google-搜索技巧/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/11/07/google-搜索技巧/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -282,7 +330,7 @@
 
           
           
-             <span id="/2016/03/16/2016-03-16-lambdabiao-da-shi-de-shi-yong/" class="leancloud_visitors" data-flag-title="lambda表达式的使用">
+             <span id="/2018/11/07/google-搜索技巧/" class="leancloud_visitors" data-flag-title="google 搜索技巧">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -303,64 +351,27 @@
       
 
       
-        <p>今天有同事问起lambda的用法，以前总是有点似懂非懂。重新看过资料后，发现明白了些。记录下心得，也分享给初学感觉困难的人。</p>
-<p>###什么是lambda表达式<br><a id="more"></a><br>以下是来自百度百科的资料：</p>
-<pre><code>“Lambda 表达式”(lambda expression)是一个匿名函数，Lambda表达式基
-于数学中的λ演算得名，直接对应于其中的lambda抽象(lambda abstraction)，
-是一个匿名函数，即没有函数名的函数。Lambda表达式可以表示闭包（注意和数学
-传统意义上的不同）。
-</code></pre><p>###一、在android studio中集成lambada<br>1.在project gradle中增加：</p>
-<pre><code>classpath &apos;me.tatarka:gradle-retrolambda:3.2.4&apos;
-</code></pre><p>2.在module gradle中增加：</p>
-<pre><code>apply plugin: &apos;me.tatarka.retrolambda&apos;
-</code></pre><p>3.在module gradle android中增加</p>
-<pre><code>compileOptions{
-    targetCompatibility 1.8
-    sourceCompatibility 1.8
-}
-</code></pre><p>###二、lambda表达式的使用<br>1.在匿名类中的使用，最典型的就是实现Runnable接口：</p>
-<pre><code>new Thread(new Runnable() {
-        @Override
-        public void run() {
-            System.out.println(&quot;Hello world&quot;);
-        }
-    });
-
-    new Thread(() -&gt; System.out.println(&quot;Hello world&quot;));
-</code></pre><p>2.我们在看一个有参数的</p>
-<pre><code>String []at1={&quot;sdafasdf&quot;,&quot;sdafasdfa&quot;,&quot;sdfasdf&quot;};
-    Arrays.sort(at1, new Comparator&lt;String&gt;() {
-        @Override
-        public int compare(String lhs, String rhs) {
-            return lhs.compareTo(rhs);
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            return super.equals(o);
-        }
-    });
-
-    Arrays.sort(at1,(String s1,String s2) -&gt; (s1.compareTo(s2)));
-</code></pre><p>不知道你们有没有注意到，似乎这里的接口都只有一个方法。于是我试着写有二个接口的方法测试一下。</p>
-<pre><code>    fun5((s) -&gt; System.out.println(&quot;s&quot;));
-    fun5((s) -&gt; System.out.print(&quot;s&quot;));
-
-}
-
-interface TestLambda{
-    public void test(String s);
-
-    public int test1(String s,String e);
-}
-
-void fun5(TestLambda l){
-
-}
-</code></pre><p>错误提示：</p>
-<pre><code>Multiple non-overriding abstract methods....
-</code></pre><p>这似乎容易给人误导，直接看Comparator接口. 然而它有二个抽象方法。</p>
-<p>3）知道上面的就可以简单的使用lambda。lambda最强的应该是Java 8中 steam包对于集合的各种操作，可以很方便地并行操作大集合，充分发挥多核CPU潜能。在需要的时候在进一步使用。</p>
+        <ol>
+<li><p>准确搜索</p>
+<p> 使用””进行完全匹配</p>
+<pre><code>&quot;keyword&quot;
+</code></pre></li>
+<li><p>排除关键字</p>
+<p> 关键字 -排除关键字</p>
+<pre><code>keyword -xx     
+</code></pre></li>
+<li><p>使用*进行模糊匹配</p>
+<pre><code>我还 *不能够
+</code></pre></li>
+</ol>
+<ol>
+<li><p>使用site指定网站</p>
+<pre><code>深入理解android site:pan.baidu.com
+</code></pre></li>
+<li><p>使用filetype指定文件类型</p>
+<pre><code>深入理解android filetype:pdf
+</code></pre></li>
+</ol>
 
       
     </div>
@@ -378,17 +389,13 @@ void fun5(TestLambda l){
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/11/2016-03-11-you-mvpmo-shi-yin-qi-de-[?]-xie-si-kao/" rel="next" title="由MVP模式引起的一些思考">
-                <i class="fa fa-chevron-left"></i> 由MVP模式引起的一些思考
+              <a href="/2018/06/23/免费安装SSR-V2RAY/" rel="next" title="免费安装SSR+V2RAY">
+                <i class="fa fa-chevron-left"></i> 免费安装SSR+V2RAY
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/03/24/2016-03-24-android-studio-ndkpei-zhi/" rel="prev" title="android studio ndk配置">
-                android studio ndk配置 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -417,8 +424,8 @@ void fun5(TestLambda l){
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/03/16/2016-03-16-lambdabiao-da-shi-de-shi-yong/"
-           data-title="lambda表达式的使用" data-url="http://tianyejia.net/2016/03/16/2016-03-16-lambdabiao-da-shi-de-shi-yong/">
+      <div class="ds-thread" data-thread-key="2018/11/07/google-搜索技巧/"
+           data-title="google 搜索技巧" data-url="http://tianyejia.net/2018/11/07/google-搜索技巧/">
       </div>
     
   </div>
