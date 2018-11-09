@@ -247,6 +247,153 @@
             
               
                 
+                <a class="post-title-link" href="/2018/11/09/升级android-targetsdk/" itemprop="url">
+                  升级android targetsdk 
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-11-09T15:48:20+08:00" content="2018-11-09">
+              2018-11-09
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/11/09/升级android-targetsdk/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/11/09/升级android-targetsdk/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2018/11/09/升级android-targetsdk/" class="leancloud_visitors" data-flag-title="升级android targetsdk ">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="升级targetSDK"><a href="#升级targetSDK" class="headerlink" title="升级targetSDK"></a>升级targetSDK</h2><h3 id="Android-6-0（23）-变更"><a href="#Android-6-0（23）-变更" class="headerlink" title="Android 6.0（23） 变更"></a>Android 6.0（23） 变更</h3><ol>
+<li><p>运行时权限</p>
+ <figure class="highlight plain"><figcaption><span>Android 6.0（API 级别 23）或更高版本为目标平台的应用，</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">请务必在运行时检查和请求权限。要确定您的应用是否已被授予权限，请调用</div><div class="line">新增的 checkSelfPermission() 方法。要请求权限，请调用新增的 </div><div class="line">requestPermissions() 方法。即使您的应用并不以 Android </div><div class="line">6.0（API 级别 23）为目标平台，您也应该在新权限模式下测试您的应用。</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<ul>
+<li>权限分为正常权限与危险权限</li>
+<li><p>危险权限有</p>
+<p>  |权限组|<br>  |—-|<br>  |CALENDAR|<br>  |CALL_LOG|<br>  |CAMERA|<br>  |CONTACTS|<br>  |LOCATION|<br>  |MICROPHONE|<br>  |PHONE|<br>  |SENSORS|<br>  |SMS|<br>  |STORAGE|</p>
+</li>
+</ul>
+<ol>
+<li><p>通知</p>
+ <figure class="highlight plain"><figcaption><span>Notification.setLatestEventInfo() 方法。请改</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">用 Notification.Builder 类来构建通知。要重复更新通知，请重复使用 </div><div class="line">Notification.Builder 实例。调用 build() 方法可获取更新后的 </div><div class="line">Notification 实例。</div></pre></td></tr></table></figure>
+</li>
+<li><p>音频管理器变更</p>
+</li>
+</ol>
+<ol>
+<li>取消支持 Apache HTTP 客户端</li>
+</ol>
+<h3 id="android-7-0"><a href="#android-7-0" class="headerlink" title="android 7.0"></a>android 7.0</h3><p>####系统权限更改</p>
+<p>为了提高私有文件的安全性，面向 Android 7.0 或更高版本的应用私有目录被限制访问　(0700)。此设置可防止私有文件的元数据泄漏，如它们的大小或存在性。此权限更改有多重副作用：</p>
+<h4 id="在应用间共享文件"><a href="#在应用间共享文件" class="headerlink" title="在应用间共享文件"></a>在应用间共享文件</h4><p>对于面向 Android 7.0 的应用，Android 框架执行的 StrictMode API 政策禁止在您的应用外部公开 file:// URI。如果一项包含文件 URI 的 intent 离开您的应用，则应用出现故障，并出现 FileUriExposedException 异常。</p>
+<p>要在应用间共享文件，您应发送一项 content:// URI，并授予 URI 临时访问权限。进行此授权的最简单方式是使用 FileProvider 类。如需了解有关权限和共享文件的详细信息，请参阅共享文件。    </p>
+<h3 id="android-8-0"><a href="#android-8-0" class="headerlink" title="android 8.0"></a>android 8.0</h3><ol>
+<li>从清单文件中移除广播接收器</li>
+</ol>
+<pre><code>由于 Android 8.0 引入了新的广播接收器限制，因此您应该移除所有为隐式广播 Intent 注册的广播接收器。将它们留在原位并不会在构建时或运行时令应用失效，但当应用运行在 Android 8.0 上时它们不起任何作用。
+
+显式广播 Intent（只有您的应用可以响应的 Intent）在 Android 8.0 上仍以相同方式工作。
+
+这个新增限制有一些例外情况。如需查看在以 Android 8.0 为目标平台的应用中仍然有效的隐式广播的列表，请参阅隐式广播例外。
+</code></pre><ol>
+<li><p>Android 后台位置限制</p>
+<p> 为节约电池电量、保持良好的用户体验和确保系统健康运行，在运行 Android 8.0 的设备上使用后台应用时，降低了后台应用接收位置更新的频率。此行为变更会影响包括 Google Play 服务在内的所有接收位置更新的应用。</p>
+</li>
+</ol>
+<ol>
+<li><p>后台执行限制</p>
+<pre><code>使用 WorkManager 代替 Service
+</code></pre></li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2018/11/07/google-搜索技巧/" itemprop="url">
                   google 搜索技巧
                 </a>
@@ -1290,114 +1437,6 @@ git push origin dev --把本地仓储推送到远程仓储
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/28/NestedScrolling滑动/" itemprop="url">
-                  NestedScrollView 嵌套ViewPager 在嵌套 RecyclerView
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-03-28T17:27:50+08:00" content="2017-03-28">
-              2017-03-28
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/03/28/NestedScrolling滑动/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/28/NestedScrolling滑动/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2017/03/28/NestedScrolling滑动/" class="leancloud_visitors" data-flag-title="NestedScrollView 嵌套ViewPager 在嵌套 RecyclerView">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="NestedScrollView-嵌套ViewPager-在嵌套-RecyclerView"><a href="#NestedScrollView-嵌套ViewPager-在嵌套-RecyclerView" class="headerlink" title="NestedScrollView 嵌套ViewPager 在嵌套 RecyclerView"></a>NestedScrollView 嵌套ViewPager 在嵌套 RecyclerView</h3><p>根据业务的需要, 设想了一种NestedScrollView中 嵌套ViewPager, 在ViewPager中继续嵌套RecyclerView，然而当RecyclerView包含多个ItemType时,左右滑动ViewPager时就会产生问题。</p>
-<p>于是换成一种NestedScrollView 包含多个RecyclerView, 实现不同的布局<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/03/28/NestedScrolling滑动/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1443,13 +1482,20 @@ git push origin dev --把本地仓储推送到远程仓储
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">45</span>
+              <span class="site-state-item-count">46</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           
 
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
           
 
         </nav>

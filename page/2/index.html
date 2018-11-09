@@ -247,6 +247,114 @@
             
               
                 
+                <a class="post-title-link" href="/2017/03/28/NestedScrolling滑动/" itemprop="url">
+                  NestedScrollView 嵌套ViewPager 在嵌套 RecyclerView
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-03-28T17:27:50+08:00" content="2017-03-28">
+              2017-03-28
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/03/28/NestedScrolling滑动/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/28/NestedScrolling滑动/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/03/28/NestedScrolling滑动/" class="leancloud_visitors" data-flag-title="NestedScrollView 嵌套ViewPager 在嵌套 RecyclerView">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="NestedScrollView-嵌套ViewPager-在嵌套-RecyclerView"><a href="#NestedScrollView-嵌套ViewPager-在嵌套-RecyclerView" class="headerlink" title="NestedScrollView 嵌套ViewPager 在嵌套 RecyclerView"></a>NestedScrollView 嵌套ViewPager 在嵌套 RecyclerView</h3><p>根据业务的需要, 设想了一种NestedScrollView中 嵌套ViewPager, 在ViewPager中继续嵌套RecyclerView，然而当RecyclerView包含多个ItemType时,左右滑动ViewPager时就会产生问题。</p>
+<p>于是换成一种NestedScrollView 包含多个RecyclerView, 实现不同的布局<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/03/28/NestedScrolling滑动/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/01/02/2016年终总结/" itemprop="url">
                   2016年度个人工作总结报告
                 </a>
@@ -1244,169 +1352,6 @@ sudo: apktool: command not found
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/04/Corodova源码分析值CorodovaWebView/" itemprop="url">
-                  Corodova源码分析之CorodovaWebView
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-04T17:14:42+08:00" content="2016-08-04">
-              2016-08-04
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/08/04/Corodova源码分析值CorodovaWebView/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/04/Corodova源码分析值CorodovaWebView/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/08/04/Corodova源码分析值CorodovaWebView/" class="leancloud_visitors" data-flag-title="Corodova源码分析之CorodovaWebView">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <pre><code>该分析基于Corodova 6.3.0
-</code></pre><p>CordovaWebViewImpl继承自CordovaWebView。该类主要用于Cordova中WebView的交互处理。<br>先看一下他的成员变量。</p>
-<pre><code>public static final String TAG = &quot;CordovaWebViewImpl&quot;;
-
-private PluginManager pluginManager;
-
-protected final CordovaWebViewEngine engine;
-private CordovaInterface cordova;
-
-// Flag to track that a loadUrl timeout occurred
-private int loadUrlTimeout = 0;
-
-private CordovaResourceApi resourceApi;
-private CordovaPreferences preferences;
-private CoreAndroid appPlugin;
-private NativeToJsMessageQueue nativeToJsMessageQueue;
-private EngineClient engineClient = new EngineClient();
-private boolean hasPausedEver;
-
-// The URL passed to loadUrl(), not necessarily the URL of the current page.
-String loadedUrl;
-
-/** custom view created by the browser (a video player for example) */
-private View mCustomView;
-private WebChromeClient.CustomViewCallback mCustomViewCallback;
-
-private Set&lt;Integer&gt; boundKeyCodes = new HashSet&lt;Integer&gt;();
-</code></pre><p>PluginManager: 对于插件的管理,有对插件的存取，他的主要方法为exec() ：</p>
-<pre><code>public void exec(final String service, final String action, final String callbackId, final String rawArgs) {
-    CordovaPlugin plugin = getPlugin(service);
-    if (plugin == null) {
-        Log.d(TAG, &quot;exec() call to unknown plugin: &quot; + service);
-        PluginResult cr = new PluginResult(PluginResult.Status.CLASS_NOT_FOUND_EXCEPTION);
-        app.sendPluginResult(cr, callbackId);
-        return;
-    }
-    CallbackContext callbackContext = new CallbackContext(callbackId, app);
-    try {
-        long pluginStartTime = System.currentTimeMillis();
-        boolean wasValidAction = plugin.execute(action, rawArgs, callbackContext);
-        long duration = System.currentTimeMillis() - pluginStartTime;
-
-        if (duration &gt; SLOW_EXEC_WARNING_THRESHOLD) {
-            Log.w(TAG, &quot;THREAD WARNING: exec() call to &quot; + service + &quot;.&quot; + action + &quot; blocked the main thread for &quot; + duration + &quot;ms. Plugin should use CordovaInterface.getThreadPool().&quot;);
-        }
-        if (!wasValidAction) {
-            PluginResult cr = new PluginResult(PluginResult.Status.INVALID_ACTION);
-            callbackContext.sendPluginResult(cr);
-        }
-    } catch (JSONException e) {
-        PluginResult cr = new PluginResult(PluginResult.Status.JSON_EXCEPTION);
-        callbackContext.sendPluginResult(cr);
-    } catch (Exception e) {
-        Log.e(TAG, &quot;Uncaught exception from plugin&quot;, e);
-        callbackContext.error(e.getMessage());
-    }
-}
-</code></pre><p>CordovaInterface…    </p>
-<p>CordovaInterface,<br>CorodvaResourceApi: 对于资源的原生调用<br>CorodvaPreferences, </p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1452,13 +1397,20 @@ private Set&lt;Integer&gt; boundKeyCodes = new HashSet&lt;Integer&gt;();
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">45</span>
+              <span class="site-state-item-count">46</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           
 
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
           
 
         </nav>
