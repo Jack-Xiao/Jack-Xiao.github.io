@@ -247,6 +247,523 @@
             
               
                 
+                <a class="post-title-link" href="/2019/03/20/工厂模式/" itemprop="url">
+                  工厂模式
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2019-03-20T15:18:38+08:00" content="2019-03-20">
+              2019-03-20
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2019/03/20/工厂模式/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/03/20/工厂模式/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2019/03/20/工厂模式/" class="leancloud_visitors" data-flag-title="工厂模式">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2019/03/20/装饰者模式/" itemprop="url">
+                  装饰者模式
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2019-03-20T09:38:02+08:00" content="2019-03-20">
+              2019-03-20
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2019/03/20/装饰者模式/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/03/20/装饰者模式/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2019/03/20/装饰者模式/" class="leancloud_visitors" data-flag-title="装饰者模式">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="装饰者模式"><a href="#装饰者模式" class="headerlink" title="装饰者模式:"></a>装饰者模式:</h4><p>允许向一个现有的对象添加新的功能，同时又不改变其结构。这种类型的设计模式属于结构型模式，它是作为现有的类的一个包装。动态的给对象添加一些额外的属性或行为</p>
+<p>注：装饰者和被装饰者对象有相同的超类型，因为装饰者和被装饰者必须是一样的类型，这里利用继承是为了达到类型匹配，而不是利用继承获得行为。</p>
+<h4 id="优点"><a href="#优点" class="headerlink" title="优点:"></a>优点:</h4><p>装饰类和被装饰类可以独立发展，不会相互耦合，装饰模式是继承的一个替代模式，装饰模式可以动态扩展一个实现类的功能。</p>
+<p>可见，装饰者模式可以非常灵活地动态地给被装饰者添加新行为，它的缺点也显现出来了，那就是必须管理好更多的对象，但是，装饰者模式可以和工厂模式或生成器这样的模式一块使用来避免这个问题。</p>
+<h4 id="首先第一个装饰者和被装饰者的超类Sweet-java"><a href="#首先第一个装饰者和被装饰者的超类Sweet-java" class="headerlink" title="首先第一个装饰者和被装饰者的超类Sweet.java"></a>首先第一个装饰者和被装饰者的超类Sweet.java</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">public abstract class Sweet &#123;</div><div class="line">    String description = &quot;Sweet&quot;;</div><div class="line"></div><div class="line">    public String getDescription() &#123;</div><div class="line">        return description;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public abstract double cost();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="定义被装饰者蛋糕类，Cake-java"><a href="#定义被装饰者蛋糕类，Cake-java" class="headerlink" title="定义被装饰者蛋糕类，Cake.java"></a>定义被装饰者蛋糕类，Cake.java</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">public class Cake extends Sweet &#123;</div><div class="line">    @Override</div><div class="line">    public String getDescription() &#123;</div><div class="line">        return &quot;一个蛋糕&quot;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public double cost() &#123;</div><div class="line">        return 66;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="定义抽象装饰者类Decorator-java"><a href="#定义抽象装饰者类Decorator-java" class="headerlink" title="定义抽象装饰者类Decorator.java"></a>定义抽象装饰者类Decorator.java</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">public abstract class Decorator extends Sweet &#123;</div><div class="line">    public abstract String getDescription();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="定义具体装饰者水果类，FruitDecorator-java"><a href="#定义具体装饰者水果类，FruitDecorator-java" class="headerlink" title="定义具体装饰者水果类，FruitDecorator.java"></a>定义具体装饰者水果类，FruitDecorator.java</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">ublic class FruitDecorator extends Decorator &#123;</div><div class="line">    Sweet sweet;</div><div class="line"></div><div class="line">    public FruitDecorator(Sweet sweet) &#123;</div><div class="line">        this.sweet = sweet;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public String getDescription() &#123;</div><div class="line">        return sweet.getDescription() + &quot;，水果&quot;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public double cost() &#123;</div><div class="line">        return sweet.cost() + 10;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="定义具体装饰者蜡烛类，CandleDecorator-java："><a href="#定义具体装饰者蜡烛类，CandleDecorator-java：" class="headerlink" title="定义具体装饰者蜡烛类，CandleDecorator.java："></a>定义具体装饰者蜡烛类，CandleDecorator.java：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">public class CandleDecorator extends Decorator &#123;</div><div class="line">    Sweet sweet;</div><div class="line"></div><div class="line">    public CandleDecorator(Sweet sweet) &#123;</div><div class="line">        this.sweet = sweet;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public String getDescription() &#123;</div><div class="line">        return sweet.getDescription() + &quot;，蜡烛&quot;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public double cost() &#123;</div><div class="line">        return sweet.cost() + 10;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结:"></a>总结:</h4><ol>
+<li><strong>装饰者和被装饰者对象有相同的超类型, 所以在任何需要原始对象(被装饰者)的场合, 都可以用装饰过得对象代替原始对象。</strong></li>
+<li>可以用一个或多个装饰者包装一个对象（被装饰者）</li>
+<li><strong>装饰者可以在被装饰者对象的相应方法前后增加相应的功能逻辑。</strong></li>
+<li>被装饰者可以在任何时候被装饰，所以可以在运行时动态地、不限量地用你喜欢的装饰者来装饰对象。</li>
+<li>装饰者会导致出现很多小对象，如果过度使用，会让程序变得复杂。</li>
+</ol>
+<p>装饰模式：以对客户端透明的方式扩展对象的功能，是继承关系的一个替代方案；<br>代理模式：给一个对象提供一个代理对象，并由代理对象来控制对原有对象的引用；</p>
+<p><strong>光看定义可能还是比较模糊。二者区别在哪里呢？</strong></p>
+<ul>
+<li>装饰模式应该为所装饰的对象增强功能</li>
+<li>代理模式对代理的对象施加控制，但不对对象本身的功能进行增强。</li>
+</ul>
+<p><strong>参考资料</strong><br><a href="https://ivanljt.github.io/blog/2017/09/05/Android-%E6%BA%90%E7%A0%81%E4%B8%AD%E7%9A%84%E8%A3%85%E9%A5%B0%E8%80%85%E6%A8%A1%E5%BC%8F/" target="_blank" rel="external">Android-源码中的装饰者模式</a><br><a href="https://juejin.im/post/5a33e7d76fb9a045167d412c" target="_blank" rel="external">Java设计模式之装饰者模式(Decorator pattern)</a><br><a href="http://www.runoob.com/design-pattern/decorator-pattern.html" target="_blank" rel="external">装饰器模式</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2019/03/19/观察者模式/" itemprop="url">
+                  观察者模式
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2019-03-19T15:40:59+08:00" content="2019-03-19">
+              2019-03-19
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2019/03/19/观察者模式/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/03/19/观察者模式/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2019/03/19/观察者模式/" class="leancloud_visitors" data-flag-title="观察者模式">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><a href="https://zh.wikipedia.org/wiki/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F" target="_blank" rel="external">观察者模式</a>:观察者模式是软件设计模式的一种。在此种模式中，一个目标对象管理所有相依于它的观察者对象，<strong>并且在它本身的状态改变时主动发出通知</strong>。这通常透过呼叫各观察者所提供的方法来实现。此种模式通常被用来实时事件处理系统。</p>
+<p><strong>抽象主题:</strong> 定义添加和删除观察者的功能，也就是注册和解除注册的功能<br><strong>抽象观察者:</strong> 定义观察者收到主题通知后要做什么事情<br><strong>具体主题:</strong> 抽象主题的实现<br><strong>具体观察者:</strong> 抽象观察者的实现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">// 这是主题接口，对象使用此接口注册为观察者，或者把自己从观察者中删除</div><div class="line">public interface Subject&#123;</div><div class="line">    void registerObserver(Observer o);</div><div class="line">    void removeObserver(Observer o);</div><div class="line">    void notifyObservers();</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 一个具体的主题总是实现主题接口，除了注册和撤销方法之外，具体主题还实现了notifyObservers，此方法用于在状态改变时更新所有当前观察者</div><div class="line">public class ConcreteSubject implements Subject &#123;</div><div class="line">    @Override</div><div class="line">    public void registerObserver(Observer o) &#123;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    @Override</div><div class="line">    public void removeObserver(Observer o) &#123;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    @Override</div><div class="line">    public void notifyObservers() &#123;</div><div class="line">    &#125;</div><div class="line">&#125; </div><div class="line"></div><div class="line">public interface Observer &#123;</div><div class="line">    void update();</div><div class="line">&#125;</div><div class="line"> </div><div class="line">//具体的观察者可以是实现此接口的任意类。观察者必须注册具体主题，以便接收更新</div><div class="line">public class ConcreteObserver implements Observer &#123;</div><div class="line">    @Override</div><div class="line">    public void update() &#123;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="模式分析"><a href="#模式分析" class="headerlink" title="模式分析:"></a>模式分析:</h3><ul>
+<li>观察者模式, 描述了如何建立对象和对象之间的依赖关系, 如何构造满足这种需求的系统</li>
+<li>也称发布-订阅模式</li>
+</ul>
+<h4 id="优点"><a href="#优点" class="headerlink" title="优点:"></a>优点:</h4><ul>
+<li>观察者模式可以实现表示层和数据逻辑层的分离，并定义了稳定的消息更新传递机制，抽象了更新接口，使得可以有各种各样不同的表示层作为具体观察者角色。</li>
+<li>观察者模式在观察目标和观察者之间建立一个抽象的耦合。</li>
+<li>观察者模式支持广播通信。</li>
+<li>观察者模式符合“开闭原则”的要求。</li>
+</ul>
+<h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点:"></a>缺点:</h4><ul>
+<li>如果一个观察目标对象有很多直接和间接的观察者的话，将所有的观察者都通知到会花费很多时间。</li>
+<li>如果在观察者和观察目标之间有循环依赖的话，观察目标会触发它们之间进行循环调用，可能导致系统崩溃。</li>
+<li>观察者模式没有相应的机制让观察者知道所观察的目标对象是怎么发生变化的，而仅仅只是知道观察目标发生了变化。</li>
+</ul>
+<h4 id="适用环境"><a href="#适用环境" class="headerlink" title="适用环境"></a>适用环境</h4><ul>
+<li>一个抽象模型有两个方面，其中一个方面依赖于另一个方面。将这些方面封装在独立的对象中使它们可以各自独立地改变和复用。</li>
+<li>一个对象的改变将导致其他一个或多个对象也发生改变，而不知道具体有多少对象将发生改变，可以降低对象之间的耦合度。</li>
+<li>一个对象必须通知其他对象，而并不知道这些对象是谁。</li>
+<li>需要在系统中创建一个触发链，A对象的行为将影响B对象，B对象的行为将影响C对象……，可以使用观察者模式创建一种链式触发机制。</li>
+</ul>
+<h3 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h3><p>RxJava是观察者模式的扩展</p>
+<p>参考链接:<br><a href="https://design-patterns.readthedocs.io/zh_CN/latest/behavioral_patterns/observer.html" target="_blank" rel="external">观察者模式</a><br><a href="https://juejin.im/post/5a521d68f265da3e4e25750e" target="_blank" rel="external">从观察者模式出发，聊聊RxJava</a> </p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2019/03/19/策略模式/" itemprop="url">
+                  策略模式
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2019-03-19T14:33:27+08:00" content="2019-03-19">
+              2019-03-19
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2019/03/19/策略模式/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/03/19/策略模式/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2019/03/19/策略模式/" class="leancloud_visitors" data-flag-title="策略模式">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="策略模式-定义了算法族，分别封装起来，让它们之间可以互相替换，此模式让算法的变化独立于使用算法的客户。"><a href="#策略模式-定义了算法族，分别封装起来，让它们之间可以互相替换，此模式让算法的变化独立于使用算法的客户。" class="headerlink" title="策略模式:定义了算法族，分别封装起来，让它们之间可以互相替换，此模式让算法的变化独立于使用算法的客户。"></a><a href="https://zh.wikipedia.org/wiki/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F" target="_blank" rel="external">策略模式</a>:定义了算法族，分别封装起来，让它们之间可以互相替换，此模式让算法的变化独立于使用算法的客户。</h4><h4 id="策略模式的结构"><a href="#策略模式的结构" class="headerlink" title="策略模式的结构:"></a>策略模式的结构:</h4><ul>
+<li>定义了一族算法（业务规则）</li>
+<li>封装了每个算法</li>
+<li>这族的算法可互换代替</li>
+</ul>
+<h4 id="解决方式"><a href="#解决方式" class="headerlink" title="解决方式:"></a>解决方式:</h4><p>对象有某个行为，但不同的场景中, 该行为有不同的实现算法。<br>调用方(Client.java)决定调用具体的算法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line">/*定义抽象算法*/</div><div class="line">public interface Strategy &#123;</div><div class="line">    public void algorithm();</div><div class="line">&#125;</div><div class="line"></div><div class="line">/*算法A*/</div><div class="line">public class ConcreteStrategyA implements Strategy &#123;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void algorithm() &#123;</div><div class="line">        System.out.print(&quot;算法A&quot;);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">/*算法B*/</div><div class="line">public class ConcreteStrategyB implements Strategy &#123;</div><div class="line">    @Override</div><div class="line">    public void algorithm() &#123;</div><div class="line">        System.out.print(&quot;算法B&quot;);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">/*定义环境角色（Context）*/</div><div class="line">class Context &#123;</div><div class="line"></div><div class="line">    Strategy strategy;</div><div class="line"></div><div class="line">    // Constructor</div><div class="line">    public Context(Strategy strategy) &#123;</div><div class="line">        this.strategy = strategy;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void execute() &#123;</div><div class="line">        this.strategy.execute();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">/*客户端调用*/</div><div class="line">public class Client &#123;</div><div class="line"></div><div class="line">    public void main(String[] args)&#123;</div><div class="line">        Strategy a = new ConcreteStrategyA();</div><div class="line"></div><div class="line">        //算法A</div><div class="line">        Context context = new Context();</div><div class="line">        context.setStrategy(a);</div><div class="line">        a.algorithm();</div><div class="line"></div><div class="line">        //算法B</div><div class="line">        Strategy b = new ConcreteStrategyB();</div><div class="line">        context.setStrategy(b);</div><div class="line">        b.algorithm();</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="策略模式分析"><a href="#策略模式分析" class="headerlink" title="策略模式分析:"></a>策略模式分析:</h3><ul>
+<li>策略模式是一个比较容易理解和使用的设计模式，策略模式是对算法的封装，它把算法的责任和算法本身分割开，委派给不同的对象管理。策略模式通常把一个系列的算法封装到一系列的策略类里面，作为一个抽象策略类的子类。用一句话来说，就是“准备一组算法，并将每一个算法封装起来，使得它们可以互换”。</li>
+<li>在策略模式中，应当由客户端自己决定在什么情况下使用什么具体策略角色。</li>
+<li>策略模式仅仅封装算法，提供新算法插入到已有系统中，以及老算法从系统中“退休”的方便，策略模式并不决定在何时使用何种算法，算法的选择由客户端来决定。这在一定程度上提高了系统的灵活性，但是客户端需要理解所有具体策略类之间的区别，以便选择合适的算法，这也是策略模式的缺点之一，在一定程度上增加了客户端的使用难度。</li>
+</ul>
+<h4 id="优点"><a href="#优点" class="headerlink" title="优点:"></a>优点:</h4><ul>
+<li>策略模式提供了对“开闭原则”的完美支持，用户可以在不修改原有系统的基础上选择算法或行为，也可以灵活地增加新的算法或行为。</li>
+<li>策略模式提供了管理相关的算法族的办法。</li>
+<li>策略模式提供了可以替换继承关系的办法。</li>
+<li>使用策略模式可以避免使用多重条件转移语句</li>
+</ul>
+<h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><ul>
+<li>客户端必须知道所有的策略类，并自行决定使用哪一个策略类。</li>
+<li>策略模式将造成产生很多策略类，可以通过使用享元模式在一定程度上减少对象的数量。</li>
+</ul>
+<h4 id="适用环境"><a href="#适用环境" class="headerlink" title="适用环境"></a>适用环境</h4><ul>
+<li>如果在一个系统里面有许多类，它们之间的区别仅在于它们的行为，那么使用策略模式可以动态地让一个对象在许多行为中选择一种行为。</li>
+<li>一个系统需要动态地在几种算法中选择一种。</li>
+<li>如果一个对象有很多的行为，如果不用恰当的模式，这些行为就只好使用多重的条件选择语句来实现。</li>
+<li>不希望客户端知道复杂的、与算法相关的数据结构，在具体策略类中封装算法和相关的数据结构，提高算法的保密性与安全性。</li>
+</ul>
+<h4 id="模式扩展"><a href="#模式扩展" class="headerlink" title="模式扩展"></a>模式扩展</h4><ul>
+<li>可以通过环境类状态的个数来决定是使用策略模式还是状态模式。</li>
+<li>策略模式的环境类自己选择一个具体策略类，具体策略类无须关心环境类；而状态模式的环境类由于外在因素需要放进一个具体状态中，以便通过其方法实现状态的切换，因此环境类和状态类之间存在一种双向的关联关系。</li>
+<li>使用策略模式时，客户端需要知道所选的具体策略是哪一个，而使用状态模式时，客户端无须关心具体状态，环境类的状态会根据用户的操作自动转换。</li>
+<li>如果系统中某个类的对象存在多种状态，不同状态下行为有差异，而且这些状态之间可以发生转换时使用状态模式；如果系统中某个类的某一行为存在多种实现方式，而且这些实现方式可以互换时使用策略模式。</li>
+</ul>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><ul>
+<li>在策略模式中定义了一系列算法，将每一个算法封装起来，并让它们可以相互替换。策略模式让算法独立于使用它的客户而变化，也称为政策模式。策略模式是一种对象行为型模式。<br>策略模式包含三个角色：环境类在解决某个问题时可以采用多种策略，在环境类中维护一个对抽象策略类的引用实例；抽象策略类为所支持的算法声明了抽象方法，是所有策略类的父类；具体策略类实现了在抽象策略类中定义的算法。</li>
+<li>策略模式是对算法的封装，它把算法的责任和算法本身分割开，委派给不同的对象管理。策略模式通常把一个系列的算法封装到一系列的策略类里面，作为一个抽象策略类的子类。</li>
+<li>策略模式主要优点在于对“开闭原则”的完美支持，在不修改原有系统的基础上可以更换算法或者增加新的算法，它很好地管理算法族，提高了代码的复用性，是一种替换继承，避免多重条件转移语句的实现方式；其缺点在于客户端必须知道所有的策略类，并理解其区别，同时在一定程度上增加了系统中类的个数，可能会存在很多策略类。</li>
+<li>策略模式适用情况包括：在一个系统里面有许多类，它们之间的区别仅在于它们的行为，使用策略模式可以动态地让一个对象在许多行为中选择一种行为；一个系统需要动态地在几种算法中选择一种；避免使用难以维护的多重条件选择语句；希望在具体策略类中封装算法和与相关的数据结构。</li>
+</ul>
+<h3 id="android-中的策略模式"><a href="#android-中的策略模式" class="headerlink" title="android 中的策略模式"></a>android 中的策略模式</h3><ol>
+<li>ListView设置的 setAdapter(ListAdapter) ListAdapter的子类ArrayAdapter、BaseAdapter均为最体算法适配View</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">mList.setAdapter(new ArrayAdapter&lt;&gt;(</div><div class="line">							this,</div><div class="line">							R.layout.item_text,</div><div class="line">							Arrays.asList(&quot;shi&quot;,&quot;xin&quot;,&quot;zhang&quot;)))</div></pre></td></tr></table></figure>
+<ol>
+<li>TimeInterpolator<br>时间插值器，它是一个接口，定义了动画改变的速率，允许动画进行非匀速变化。<br>我们在使用属性动画时，可以根据需要选择合适的时间插值器：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ObjectAnimator animator = ObjectAnimator.ofFloat(mListView, View.ALPHA, 0F, 1F);</div><div class="line">animator.setInterpolator(new AccelerateInterpolator()); 加速</div><div class="line">animator.setInterpolator(new OvershootInterpolator()); 跑过头又返回</div></pre></td></tr></table></figure>
+<h4 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接:"></a>参考链接:</h4><p><a href="https://design-patterns.readthedocs.io/zh_CN/latest/behavioral_patterns/strategy.html" target="_blank" rel="external">策略模式</a></p>
+<p><a href="https://blog.csdn.net/carson_ho/article/details/54910374" target="_blank" rel="external">策略模式（Strategy Pattern）- 最易懂的设计模式解析</a></p>
+<p><a href="https://www.cnblogs.com/java-my-life/archive/2012/05/10/2491891.html" target="_blank" rel="external">《JAVA与模式》之策略模式</a></p>
+<p><a href="https://blog.csdn.net/u011240877/article/details/52493408" target="_blank" rel="external">Android 中的那些策略模式</a>    </p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2018/11/25/每周观察/" itemprop="url">
                   每周观察
                 </a>
@@ -974,475 +1491,11 @@ chmod +x shadowsocksR.sh
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2018/04/19/textview-中-支持的HTML标签/" itemprop="url">
-                  textview 中 支持的HTML标签
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2018-04-19T07:10:42+08:00" content="2018-04-19">
-              2018-04-19
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2018/04/19/textview-中-支持的HTML标签/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/04/19/textview-中-支持的HTML标签/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2018/04/19/textview-中-支持的HTML标签/" class="leancloud_visitors" data-flag-title="textview 中 支持的HTML标签">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>TextView 利用setHtml方法也可以添加一下简单的HTML效果</p>
-<h4 id="br"><a href="#br" class="headerlink" title="br"></a>br</h4><pre><code>&lt;br/&gt;
-</code></pre><p> 换行标签</p>
-<h4 id="p"><a href="#p" class="headerlink" title="p"></a>p</h4><pre><code>&lt;p/&gt;
-</code></pre><p>段落，其实本质就是如果当前文本是以换行结尾，则在末尾增加一个换行，反之增加两个换行’\n’。</p>
-<h4 id="strong-amp-b"><a href="#strong-amp-b" class="headerlink" title="strong &amp; b"></a>strong &amp; b</h4><pre><code>&lt;b&gt; &lt;strong&gt;
-</code></pre><p>加粗，两个标签效果一样</p>
-<h4 id="em-amp-cite-amp-den-amp-i"><a href="#em-amp-cite-amp-den-amp-i" class="headerlink" title="em &amp; cite &amp; den &amp; i"></a>em &amp; cite &amp; den &amp; i</h4><pre><code>&lt;em&gt; &lt;cite&gt; &lt;den&gt; &lt;i&gt;
-</code></pre><p>斜体<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2018/04/19/textview-中-支持的HTML标签/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2018/04/14/git-的使用/" itemprop="url">
-                  git 的使用
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2018-04-14T22:37:01+08:00" content="2018-04-14">
-              2018-04-14
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2018/04/14/git-的使用/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/04/14/git-的使用/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2018/04/14/git-的使用/" class="leancloud_visitors" data-flag-title="git 的使用">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <pre><code>当你被面临的问题困住的时候, 你就能感同身受的体会到那些技术的巨大优越性了, git 就是这样的技术
-</code></pre><h4 id="区"><a href="#区" class="headerlink" title="区"></a>区</h4><p>git有两个区, 暂存区, 工作区。</p>
-<ul>
-<li>工作区就是直接写代码,修修改改的地方。</li>
-<li><p>暂存区就是add . 命令所存放文件的地方。也是</p>
-<pre><code>git stash --把工作区放到暂存区
-git stash apply --把暂存区内容返回到工作区
-git stash pop --把暂存区内容返回到工作区,并删除原有暂存区内容。
-</code></pre></li>
-</ul>
-<h4 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h4><ol>
-<li><p>创建分支</p>
-<pre><code>git branch &lt;branch&gt;
-</code></pre></li>
-</ol>
-<ol>
-<li><p>切换分支</p>
-<pre><code>git checkout &lt;branch&gt;
-</code></pre></li>
-<li><p>合并分支</p>
-<pre><code>git merge &lt;branch&gt;        
-</code></pre></li>
-<li><p>删除分支</p>
-<pre><code>git branch -d &lt;branch&gt;        
-</code></pre></li>
-</ol>
-<h4 id="远程仓储"><a href="#远程仓储" class="headerlink" title="远程仓储"></a>远程仓储</h4><pre><code>git push origin dev -- 推送对应的远程分支
-
-$ git checkout -b dev origin/dev  (把远程存在的分支，clone 到本地)
-
-git remote -v 查看远程库信息
-
-git push origin dev --把本地仓储推送到远程仓储
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2018/01/12/2017个人年终总结/" itemprop="url">
-                  2017个人年终总结
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2018-01-12T16:33:23+08:00" content="2018-01-12">
-              2018-01-12
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2018/01/12/2017个人年终总结/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/01/12/2017个人年终总结/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2018/01/12/2017个人年终总结/" class="leancloud_visitors" data-flag-title="2017个人年终总结">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <pre><code>2017年很快就过去了
-</code></pre><h3 id="技术的提升"><a href="#技术的提升" class="headerlink" title="技术的提升"></a>技术的提升</h3><p>总体上，技术的提升不大。 直到2017年底,才明白架构的意义。变量和数据结构如同一砖一瓦,一条横木。他们是整个建筑大厦最平凡的事物，却正是他们构建出整个建筑, 让大厦愈加丰满。<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2018/01/12/2017个人年终总结/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/09/14/cordova-build-失败/" itemprop="url">
-                  cordova build 失败
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-09-14T09:20:38+08:00" content="2017-09-14">
-              2017-09-14
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/09/14/cordova-build-失败/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/09/14/cordova-build-失败/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2017/09/14/cordova-build-失败/" class="leancloud_visitors" data-flag-title="cordova build 失败">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1483,7 +1536,7 @@ git push origin dev --把本地仓储推送到远程仓储
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">47</span>
+              <span class="site-state-item-count">51</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1493,7 +1546,7 @@ git push origin dev --把本地仓储推送到远程仓储
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -1532,7 +1585,7 @@ git push origin dev --把本地仓储推送到远程仓储
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

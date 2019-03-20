@@ -247,6 +247,470 @@
             
               
                 
+                <a class="post-title-link" href="/2018/04/19/textview-中-支持的HTML标签/" itemprop="url">
+                  textview 中 支持的HTML标签
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-04-19T07:10:42+08:00" content="2018-04-19">
+              2018-04-19
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/04/19/textview-中-支持的HTML标签/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/04/19/textview-中-支持的HTML标签/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2018/04/19/textview-中-支持的HTML标签/" class="leancloud_visitors" data-flag-title="textview 中 支持的HTML标签">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>TextView 利用setHtml方法也可以添加一下简单的HTML效果</p>
+<h4 id="br"><a href="#br" class="headerlink" title="br"></a>br</h4><pre><code>&lt;br/&gt;
+</code></pre><p> 换行标签</p>
+<h4 id="p"><a href="#p" class="headerlink" title="p"></a>p</h4><pre><code>&lt;p/&gt;
+</code></pre><p>段落，其实本质就是如果当前文本是以换行结尾，则在末尾增加一个换行，反之增加两个换行’\n’。</p>
+<h4 id="strong-amp-b"><a href="#strong-amp-b" class="headerlink" title="strong &amp; b"></a>strong &amp; b</h4><pre><code>&lt;b&gt; &lt;strong&gt;
+</code></pre><p>加粗，两个标签效果一样</p>
+<h4 id="em-amp-cite-amp-den-amp-i"><a href="#em-amp-cite-amp-den-amp-i" class="headerlink" title="em &amp; cite &amp; den &amp; i"></a>em &amp; cite &amp; den &amp; i</h4><pre><code>&lt;em&gt; &lt;cite&gt; &lt;den&gt; &lt;i&gt;
+</code></pre><p>斜体<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2018/04/19/textview-中-支持的HTML标签/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/04/14/git-的使用/" itemprop="url">
+                  git 的使用
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-04-14T22:37:01+08:00" content="2018-04-14">
+              2018-04-14
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/04/14/git-的使用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/04/14/git-的使用/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2018/04/14/git-的使用/" class="leancloud_visitors" data-flag-title="git 的使用">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <pre><code>当你被面临的问题困住的时候, 你就能感同身受的体会到那些技术的巨大优越性了, git 就是这样的技术
+</code></pre><h4 id="区"><a href="#区" class="headerlink" title="区"></a>区</h4><p>git有两个区, 暂存区, 工作区。</p>
+<ul>
+<li>工作区就是直接写代码,修修改改的地方。</li>
+<li><p>暂存区就是add . 命令所存放文件的地方。也是</p>
+<pre><code>git stash --把工作区放到暂存区
+git stash apply --把暂存区内容返回到工作区
+git stash pop --把暂存区内容返回到工作区,并删除原有暂存区内容。
+</code></pre></li>
+</ul>
+<h4 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h4><ol>
+<li><p>创建分支</p>
+<pre><code>git branch &lt;branch&gt;
+</code></pre></li>
+</ol>
+<ol>
+<li><p>切换分支</p>
+<pre><code>git checkout &lt;branch&gt;
+</code></pre></li>
+<li><p>合并分支</p>
+<pre><code>git merge &lt;branch&gt;        
+</code></pre></li>
+<li><p>删除分支</p>
+<pre><code>git branch -d &lt;branch&gt;        
+</code></pre></li>
+</ol>
+<h4 id="远程仓储"><a href="#远程仓储" class="headerlink" title="远程仓储"></a>远程仓储</h4><pre><code>git push origin dev -- 推送对应的远程分支
+
+$ git checkout -b dev origin/dev  (把远程存在的分支，clone 到本地)
+
+git remote -v 查看远程库信息
+
+git push origin dev --把本地仓储推送到远程仓储
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/01/12/2017个人年终总结/" itemprop="url">
+                  2017个人年终总结
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-01-12T16:33:23+08:00" content="2018-01-12">
+              2018-01-12
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/01/12/2017个人年终总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/01/12/2017个人年终总结/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2018/01/12/2017个人年终总结/" class="leancloud_visitors" data-flag-title="2017个人年终总结">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <pre><code>2017年很快就过去了
+</code></pre><h3 id="技术的提升"><a href="#技术的提升" class="headerlink" title="技术的提升"></a>技术的提升</h3><p>总体上，技术的提升不大。 直到2017年底,才明白架构的意义。变量和数据结构如同一砖一瓦,一条横木。他们是整个建筑大厦最平凡的事物，却正是他们构建出整个建筑, 让大厦愈加丰满。<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2018/01/12/2017个人年终总结/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/09/14/cordova-build-失败/" itemprop="url">
+                  cordova build 失败
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-09-14T09:20:38+08:00" content="2017-09-14">
+              2017-09-14
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/09/14/cordova-build-失败/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/09/14/cordova-build-失败/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/09/14/cordova-build-失败/" class="leancloud_visitors" data-flag-title="cordova build 失败">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/07/12/Realm的简单使用/" itemprop="url">
                   Realm的简单使用
                 </a>
@@ -894,475 +1358,11 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/11/08/okio/" itemprop="url">
-                  okio解析
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-11-08T10:51:42+08:00" content="2016-11-08">
-              2016-11-08
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/11/08/okio/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/08/okio/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/11/08/okio/" class="leancloud_visitors" data-flag-title="okio解析">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="okio的作用"><a href="#okio的作用" class="headerlink" title="okio的作用"></a>okio的作用</h3><p>okio是作为OkHttp网络请求的io包装库，io文件操作简单。减少了很多io操作的基本代码,并且对内存和cpu使用做了优化。</p>
-<h2 id="okio框架结构与源码分析"><a href="#okio框架结构与源码分析" class="headerlink" title="okio框架结构与源码分析"></a>okio框架结构与源码分析</h2><h4 id="Okio的简单使用"><a href="#Okio的简单使用" class="headerlink" title="Okio的简单使用"></a>Okio的简单使用</h4><p>Okio库的核心是两个接口Sink和Source，这两个接口都继承了Closeable接口；而Sink可以简单的看做OutputStream（将流写入文件），Source可以简单的看做InputStream（从文件读取至流）。而这两个接口都是支持读写超时设置的。其中，Sink声明了write()、flush()、close()、timeout()等方法，Source中声明了read()、close()、timeout(),这些方法包含了对文件的读写及资源的释放。它们各自有一个支持缓冲区的子类接口，BufferedSink和BufferedSource，这两个子接口有一个共同的实现类Buffer,对缓冲区操作。<br><img src="http://7xrir6.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-11-08%20%E4%B8%8B%E5%8D%882.12.01.png" alt=""><br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/11/08/okio/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/10/13/mvp/" itemprop="url">
-                  mvp
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-13T17:21:15+08:00" content="2016-10-13">
-              2016-10-13
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/10/13/mvp/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/13/mvp/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/10/13/mvp/" class="leancloud_visitors" data-flag-title="mvp">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/09/27/初学Node-js/" itemprop="url">
-                  初学Node.js
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-27T14:08:23+08:00" content="2016-09-27">
-              2016-09-27
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/09/27/初学Node-js/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/27/初学Node-js/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/09/27/初学Node-js/" class="leancloud_visitors" data-flag-title="初学Node.js">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="什么是Node-js"><a href="#什么是Node-js" class="headerlink" title="什么是Node.js"></a>什么是<a href="http://baike.baidu.com/link?url=s8biSWzK_lkRR0Sk97x8wERbzu2v15yXh-kQeajggSx_xy18am0O3Spstn4vD65jNvLYCIYFSIx-EF2rZgrpVK">Node.js</a></h3><p>node.js是一个JavaScript 运行环境。实际上它是对Google V8引擎进行了封装。Node采用了一个称为“事件循环(event loop)”的架构（参看阮一峰的<a href="http://www.ruanyifeng.com/blog/2014/10/event-loop.html">这篇博客</a>）,所有的异步回调函数都会加入到“任务队列”中，主线程执行完stack中的代码就会开始调用“任务队列”中的代码（”任务队列”先进先出原则).</p>
-<h3 id="1-Node-js-REPL"><a href="#1-Node-js-REPL" class="headerlink" title="1.Node.js REPL"></a>1.Node.js REPL</h3><p>所谓REPL(Read Eval Print Loop:交互式解释器)，类型在终端或iTerm中输入命令，并接受到系统的响应。<br>同类的python 可输入 platon 进入REPL</p>
-<pre><code>python 
-</code></pre><p>node 的输入</p>
-<pre><code>node
-</code></pre>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/09/27/初学Node-js/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/15/mac下apktool反编译、重新签名/" itemprop="url">
-                  mac下apktool反编译、重新签名
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-15T15:06:56+08:00" content="2016-08-15">
-              2016-08-15
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/08/15/mac下apktool反编译、重新签名/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/15/mac下apktool反编译、重新签名/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/08/15/mac下apktool反编译、重新签名/" class="leancloud_visitors" data-flag-title="mac下apktool反编译、重新签名">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>###增加渠道<br>当中途运营需要对于某些已经发布的app增加渠道时，多渠道打包就没办法了。本文描述mac下Apk的的修改、重打包、签名。达到增加渠道包的目的。</p>
-<p>###反编译<br>1.打开<a href="https://ibotpeaches.github.io/Apktool/install/" target="_blank" rel="external">apktool官网</a><br><img src="http://7xrir6.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-08-15%20%E4%B8%8B%E5%8D%883.14.51.png" alt=""></p>
-<p>2.mac系统下：<br><img src="http://7xrir6.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-08-15%20%E4%B8%8B%E5%8D%883.19.33.png" alt=""></p>
-<ol>
-<li>点击右键链接另存为apktool</li>
-<li>下载最新的apktool,并更名为apktool.jar。</li>
-<li>把下载下来的apktool和apktool.jar copy到/usr/local/bin目录中。</li>
-<li><p>按照其他博主的提示，这一步在终端中输入apktool验证apktool环境配置，然而博主在这一步卡住,不知所云：</p>
-<pre><code>$ apktool
-zsh: permission denied: apktool
-$ sudo apktool
-Password:
-sudo: apktool: command not found
-</code></pre></li>
-</ol>
-<p>信号，apktool官网最下面有提示</p>
-<pre><code>Note - Wrapper scripts are not needed, but helpful so you don’t have to type java -jar apktool.jar over and over.
-</code></pre><ol>
-<li>cd到我们随便从网上下载的一个Apk目录中，例：demo.apk</li>
-<li>执行反编译命令 apktool d demo.apk</li>
-<li>就可以在当前目录下得到一个demo文件夹。</li>
-<li><p>于是我们就可以打开其manifest.xml文件，修改</p>
-<pre><code>&lt;meta-data android:name=&quot;UMENG_CHANNEL&quot; android:value=&quot;channel&quot;/&gt;
-</code></pre></li>
-</ol>
-<p>###二</p>
-<ol>
-<li><p>把文件夹重新编译成apk文件 </p>
-<p> java -jar /usr/local/bin/apktool.jar b apk<br>这时候生成的apk.apk就在 demo/dist 目录中。</p>
-</li>
-<li><p>然后我们在利用原来的apk增加签名：</p>
-<pre><code>jarsigner -digestalg SHA1 -sigalg MD5withRSA -tsa -verbose -keystore demo.keystore -signedjar apk.apk apk_release.apk demo.certificate
-</code></pre></li>
-</ol>
-<p>注意重新签名后的Apk会比原来的apk大一些。原因未知。</p>
-<p>Reference:<br><a href="http://www.jianshu.com/p/eb766d2bb837" target="_blank" rel="external">http://www.jianshu.com/p/eb766d2bb837</a><br><a href="http://www.cnblogs.com/lee0oo0/articles/3285109.html" target="_blank" rel="external">http://www.cnblogs.com/lee0oo0/articles/3285109.html</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1403,7 +1403,7 @@ sudo: apktool: command not found
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">47</span>
+              <span class="site-state-item-count">51</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1413,7 +1413,7 @@ sudo: apktool: command not found
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -1452,7 +1452,7 @@ sudo: apktool: command not found
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
