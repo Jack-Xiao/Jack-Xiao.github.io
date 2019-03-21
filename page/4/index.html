@@ -247,6 +247,716 @@
             
               
                 
+                <a class="post-title-link" href="/2016/08/14/关于喜欢、偶像与崇拜/" itemprop="url">
+                  关于喜欢、偶像与崇拜
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-14T22:07:02+08:00" content="2016-08-14">
+              2016-08-14
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/14/关于喜欢、偶像与崇拜/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/14/关于喜欢、偶像与崇拜/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/08/14/关于喜欢、偶像与崇拜/" class="leancloud_visitors" data-flag-title="关于喜欢、偶像与崇拜">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/08/04/Corodova源码分析值CorodovaWebView/" itemprop="url">
+                  Corodova源码分析之CorodovaWebView
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-04T17:14:42+08:00" content="2016-08-04">
+              2016-08-04
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/04/Corodova源码分析值CorodovaWebView/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/04/Corodova源码分析值CorodovaWebView/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/08/04/Corodova源码分析值CorodovaWebView/" class="leancloud_visitors" data-flag-title="Corodova源码分析之CorodovaWebView">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <pre><code>该分析基于Corodova 6.3.0
+</code></pre><p>CordovaWebViewImpl继承自CordovaWebView。该类主要用于Cordova中WebView的交互处理。<br>先看一下他的成员变量。</p>
+<pre><code>public static final String TAG = &quot;CordovaWebViewImpl&quot;;
+
+private PluginManager pluginManager;
+
+protected final CordovaWebViewEngine engine;
+private CordovaInterface cordova;
+
+// Flag to track that a loadUrl timeout occurred
+private int loadUrlTimeout = 0;
+
+private CordovaResourceApi resourceApi;
+private CordovaPreferences preferences;
+private CoreAndroid appPlugin;
+private NativeToJsMessageQueue nativeToJsMessageQueue;
+private EngineClient engineClient = new EngineClient();
+private boolean hasPausedEver;
+
+// The URL passed to loadUrl(), not necessarily the URL of the current page.
+String loadedUrl;
+
+/** custom view created by the browser (a video player for example) */
+private View mCustomView;
+private WebChromeClient.CustomViewCallback mCustomViewCallback;
+
+private Set&lt;Integer&gt; boundKeyCodes = new HashSet&lt;Integer&gt;();
+</code></pre><p>PluginManager: 对于插件的管理,有对插件的存取，他的主要方法为exec() ：</p>
+<pre><code>public void exec(final String service, final String action, final String callbackId, final String rawArgs) {
+    CordovaPlugin plugin = getPlugin(service);
+    if (plugin == null) {
+        Log.d(TAG, &quot;exec() call to unknown plugin: &quot; + service);
+        PluginResult cr = new PluginResult(PluginResult.Status.CLASS_NOT_FOUND_EXCEPTION);
+        app.sendPluginResult(cr, callbackId);
+        return;
+    }
+    CallbackContext callbackContext = new CallbackContext(callbackId, app);
+    try {
+        long pluginStartTime = System.currentTimeMillis();
+        boolean wasValidAction = plugin.execute(action, rawArgs, callbackContext);
+        long duration = System.currentTimeMillis() - pluginStartTime;
+
+        if (duration &gt; SLOW_EXEC_WARNING_THRESHOLD) {
+            Log.w(TAG, &quot;THREAD WARNING: exec() call to &quot; + service + &quot;.&quot; + action + &quot; blocked the main thread for &quot; + duration + &quot;ms. Plugin should use CordovaInterface.getThreadPool().&quot;);
+        }
+        if (!wasValidAction) {
+            PluginResult cr = new PluginResult(PluginResult.Status.INVALID_ACTION);
+            callbackContext.sendPluginResult(cr);
+        }
+    } catch (JSONException e) {
+        PluginResult cr = new PluginResult(PluginResult.Status.JSON_EXCEPTION);
+        callbackContext.sendPluginResult(cr);
+    } catch (Exception e) {
+        Log.e(TAG, &quot;Uncaught exception from plugin&quot;, e);
+        callbackContext.error(e.getMessage());
+    }
+}
+</code></pre><p>CordovaInterface…    </p>
+<p>CordovaInterface,<br>CorodvaResourceApi: 对于资源的原生调用<br>CorodvaPreferences, </p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/08/04/Cordova-源码分析之CordovaActivity/" itemprop="url">
+                  Cordova 源码分析之CordovaActivity
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-04T10:56:38+08:00" content="2016-08-04">
+              2016-08-04
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/04/Cordova-源码分析之CordovaActivity/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/04/Cordova-源码分析之CordovaActivity/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/08/04/Cordova-源码分析之CordovaActivity/" class="leancloud_visitors" data-flag-title="Cordova 源码分析之CordovaActivity">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <pre><code>基于cordova version 6.3.0
+</code></pre><p><a href="http://baike.baidu.com/link?url=Qwgc149_vx_kJMynQfszVV9MuVOAcwxnNmTRt_7zBnI8VW0-uIclwCSDpBM9J7agsrj4XQXMvaVyOfUlHj16J_">Cordova</a> 是一个能够创建android、iOS等操作系统的跨平台的项目.</p>
+<h3 id="一、创建与安装-mac环境"><a href="#一、创建与安装-mac环境" class="headerlink" title="一、创建与安装(mac环境)"></a>一、创建与安装(mac环境)</h3><p>安装:</p>
+<pre><code>sudo npm install -g cordova    
+</code></pre><p>创建项目：</p>
+<pre><code>sudo create TestDemo com.tianyejia.testdemo Test
+</code></pre><p>其中 TestDemo 就是在你执行命令的目录下面创建一个文件夹作为你的项目目录，<br>com.tianyejia.testdemo 就是你的包名， Test 就是你的项目名称。</p>
+<p>添加平台：</p>
+<pre><code>sudo cordova platform add android
+sudo cordova platform add ios
+</code></pre><p>等待一段时间，项目就创建好了。
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/08/04/Cordova-源码分析之CordovaActivity/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/06/24/关于Swift-3的新特性/" itemprop="url">
+                  关于Swift 3的新特性
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-24T10:40:51+08:00" content="2016-06-24">
+              2016-06-24
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/24/关于Swift-3的新特性/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/24/关于Swift-3的新特性/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/06/24/关于Swift-3的新特性/" class="leancloud_visitors" data-flag-title="关于Swift 3的新特性">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>原文地址: <a href="https://onevcat.com/2016/06/ios-10-sdk">https://onevcat.com/2016/06/ios-10-sdk</a></p>
+<p>开发者所需要知道的 iOS 10 SDK 新特性</p>
+<p>总览<br>距离 iPhone 横空出世已经过去了 9 个年头，iOS 的版本号也跨入了两位数。在我们回顾过去四五年 iOS 系统的发展的时候，不免感叹变化速度之快，迭代周期之短。iOS 7 翻天覆地的全新设计，iOS 8 中 Size Classes 的出现，应用扩展，以及 Cloud Kit 的加入，iOS 9 里的分屏多任务特性等等。Apple 近年都是在 WWDC 发布新的系统和软件，然后在秋季和冬季 (或者来年春季) 召开硬件产品的发布会。WWDC 上每一项软件的更新其实都预示了相应的硬件的方向，相信今年也不会例外。</p>
+<p>对于开发者来说，好消息是 iOS 10 中并没有加入太多内容。按照适配的需求，来年的 iOS 开发至少应该可以从 iOS 8 甚至 iOS 9 开始，我们将有时间对之前的版本特性进行更好的梳理，消化和实践。相比与开疆扩土，iOS 10 更专注的是对现有内容的改进，以弥补之前迅速发展所留下的一些问题，这其实正是 Apple 当下所亟需做的事情。</p>
+<p>生态整合与 Extension 开发<br>在 iOS 10 里 Apple 延续了前几年的策略，那就是进行平台整合。全世界现在没有另外一家厂商在掌握了包括桌面，移动到穿戴的一系列硬件设备的同时，还掌控了相应的从操作系统，到应用软件，再到软件商店这样一套完整的布局。Apple 显然也非常明白这个优势意味着什么。所以近年来 Apple 一直强调平台整合，如果你的应用能够同时在 iOS，watchOS 以及 macOS 上工作的话，毫无疑问将会更容易吸引用户以及 Apple 的喜爱。</p>
+<p>另外一点则是各个应用之间的整合和交互。不难发现，随着近年来 extension 开发的兴起，Apple 逐渐在从 app 是“用户体验的核心”这个理念中转移，变为用户应该也可以在通知中心，桌面挂件或者手表这样的地方完成必要交互。而应用之间的交互在以前可以说是 iOS 系统的禁区，但是去年随着 Workflow 的成功，Apple 对于应用之间的交互有助于用户生产力的提升有了清晰的认识。今年 SDK 中几个重大更新其实都是围绕这个主题来进行的。</p>
+<p>iOS 10 中，Apple 为我们添加了茫茫多 extension 的新模板，以至于在同事之间开玩笑都是我们马上就要丢掉 iOS app 开发者的工作，而转变为 iOS extension 开发者这样了。新加入的扩展的种类和数量都足以说明使用应用扩展以及进行扩展开发在今后 iOS 开发中的重要地位。如果你对扩展开发还一无所知，可以先看看这篇入门文章，里面简单介绍了关于扩展的基本概念，不同开发 target 之间代码共享的方式，以及通用的扩展开发方法等。<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/06/24/关于Swift-3的新特性/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/05/31/PhoneGap提高篇，写个插件/" itemprop="url">
+                  PhoneGap提高篇，写个插件
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-31T17:51:40+08:00" content="2016-05-31">
+              2016-05-31
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/31/PhoneGap提高篇，写个插件/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/31/PhoneGap提高篇，写个插件/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/05/31/PhoneGap提高篇，写个插件/" class="leancloud_visitors" data-flag-title="PhoneGap提高篇，写个插件">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>前言：没事写个插件玩下。</p>
+<h3 id="PhoneGap插件"><a href="#PhoneGap插件" class="headerlink" title="PhoneGap插件"></a>PhoneGap插件</h3><p>phoneGap 插件一般用于js与native java 交互使用，这样可以更加丰富phone gap写的app使用场景。<br>phoneGap插件的目录结构<br><img src="http://7xrir6.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-05-31%2018.00.48.png" alt=""><br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/05/31/PhoneGap提高篇，写个插件/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/05/29/Cocopods-App-使用/" itemprop="url">
+                  Cocopods App 使用
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-29T00:22:52+08:00" content="2016-05-29">
+              2016-05-29
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/29/Cocopods-App-使用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/29/Cocopods-App-使用/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/05/29/Cocopods-App-使用/" class="leancloud_visitors" data-flag-title="Cocopods App 使用">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Cocoapods app出来了，下载地址: <a href="">https://github.com/CocoaPods/CocoaPods-app/releases/download/1.0.0/CocoaPods.app-1.0.0.tar.bz2</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/05/26/初识phoneGap/" itemprop="url">
                   初识phoneGap
                 </a>
@@ -662,665 +1372,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/05/09/xcode-集成pod/" itemprop="url">
-                  xcode 集成pod
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-09T10:09:12+08:00" content="2016-05-09">
-              2016-05-09
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/05/09/xcode-集成pod/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/09/xcode-集成pod/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/05/09/xcode-集成pod/" class="leancloud_visitors" data-flag-title="xcode 集成pod">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>前言：一段时间没有接触IOS，都忘了ios怎么集成pod了</p>
-<h3 id="第一步-安装pod"><a href="#第一步-安装pod" class="headerlink" title="第一步 安装pod"></a>第一步 安装pod</h3><pre><code>sudo gem install cocoapods
-</code></pre><h3 id="第二步-创建项目"><a href="#第二步-创建项目" class="headerlink" title="第二步 创建项目"></a>第二步 创建项目</h3><h3 id="第三步-新建一个ios-项目"><a href="#第三步-新建一个ios-项目" class="headerlink" title="第三步 新建一个ios 项目"></a>第三步 新建一个ios 项目</h3><h3 id="第三步-初始化pod"><a href="#第三步-初始化pod" class="headerlink" title="第三步 初始化pod"></a>第三步 初始化pod</h3><p>进入到项目的跟目录，运行初始化命令</p>
-<pre><code>pod init
-</code></pre><h3 id="第四步"><a href="#第四步" class="headerlink" title="第四步"></a>第四步</h3><p>在项目的根目录运行</p>
-<pre><code>ls -a
-</code></pre><p>看到多了一个.workspace 文件，运行它就可以看到新集成的pod</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/04/14/初学python/" itemprop="url">
-                  初学python
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-14T21:43:43+08:00" content="2016-04-14">
-              2016-04-14
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/04/14/初学python/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/14/初学python/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/04/14/初学python/" class="leancloud_visitors" data-flag-title="初学python">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>前言：一直就很想学好python，有机会就好好抓住它</p>
-<p>##1. 第一课<br>linus说过的一句话:</p>
-<pre><code>Talk is cheap. Show me the code
-</code></pre><p>就从这个网站：<a href="https://github.com/Show-Me-the-Code/show-me-the-code[](https://github.com/Show-Me-the-Code/show-me-the-code" target="_blank" rel="external">https://github.com/Show-Me-the-Code/show-me-the-code[](https://github.com/Show-Me-the-Code/show-me-the-code</a>) 开始.</p>
-<pre><code>第 0001 题：做为 Apple Store App 独立开发者，你要搞限时促销，为你的应用生成激活码（或者优惠券），使用 Python 如何生成 200 个激活码（或者优惠券）？
-</code></pre><p>由于刚看完语法，选择直接抄其代码。由于没有PIL Module，于是云行：</p>
-<pre><code>pip install PIL
-</code></pre><p>报错：</p>
-<pre><code>Reading http://effbot.org/downloads/#Imaging
-No local packages or download links found for pil
-</code></pre><p>找了很久的原因终于在这个网站<a href="http://stackoverflow.com/questions/994281/is-the-python-imaging-library-not-available-on-pypi-or-am-i-missing-something" target="_blank" rel="external"></a>解决的办法<br>    easy_install -f <a href="http://www.pythonware.com/products/pil/" target="_blank" rel="external">http://www.pythonware.com/products/pil/</a> Imaging</p>
-<p>然而还是得到一堆warnning，不管它，继续抄代码。修改了很多次，终于成功了。</p>
-<p><strong>总结下</strong>: python 作为动态语言，相对于之前熟悉的静态语言，很多时候不能提供方法推断，有点让人恐慌。python 拥有非常多的包，这让习惯了严谨的语言人有写不习惯，因为也许很多时候，你需要的仅仅是去找相应的包就可以。</p>
-<p><strong>下面是这个程序的成果：</strong></p>
-<p><img src="http://7xrir6.com1.z0.glb.clouddn.com/00.jpg" alt=""><br><img src="http://7xrir6.com1.z0.glb.clouddn.com/%E8%92%82%E6%B3%95.jpg" alt=""></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/04/11/Android之Activity的使用/" itemprop="url">
-                  Android之Activity的使用
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-11T17:57:39+08:00" content="2016-04-11">
-              2016-04-11
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/04/11/Android之Activity的使用/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/11/Android之Activity的使用/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/04/11/Android之Activity的使用/" class="leancloud_visitors" data-flag-title="Android之Activity的使用">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>前言:很多知识看一眼就懂了，但也过一会就忘记了。<br>Activity:</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/03/28/Toolbar-CoordinatorLayout-AppBarLayout的使用/" itemprop="url">
-                  Toolbar/CoordinatorLayout/AppBarLayout的使用
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-28T17:12:13+08:00" content="2016-03-28">
-              2016-03-28
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/03/28/Toolbar-CoordinatorLayout-AppBarLayout的使用/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/28/Toolbar-CoordinatorLayout-AppBarLayout的使用/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/03/28/Toolbar-CoordinatorLayout-AppBarLayout的使用/" class="leancloud_visitors" data-flag-title="Toolbar/CoordinatorLayout/AppBarLayout的使用">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>一、CoordinatorLayout的使用<br>CoordinatorLayout是一个增强型的FrameLayout。它的作用通常就是协调手势效果。例如Toolbar通过固定在顶部，使用CoordinatorLayout就可以在Toolbar滑出屏幕时达到隐藏的效果。另外CoordinatorLayout还要一个可以滑动的子布局，比如RecyclerView、NestedScrollView(ListView、ScrollView不支持。更加说明官方要使用RecyclerView代替ListView. NestedScrollView代替ScrollVIew)。
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/03/28/Toolbar-CoordinatorLayout-AppBarLayout的使用/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/03/24/2016-03-24-android-studio-ndkpei-zhi/" itemprop="url">
-                  android studio ndk配置
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-24T12:05:12+08:00" content="2016-03-24">
-              2016-03-24
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/03/24/2016-03-24-android-studio-ndkpei-zhi/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/24/2016-03-24-android-studio-ndkpei-zhi/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/03/24/2016-03-24-android-studio-ndkpei-zhi/" class="leancloud_visitors" data-flag-title="android studio ndk配置">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>前言:写久了jdk，尝试着练习一下ndk的编程。</p>
-<h3 id="一、搭建NDK环镜"><a href="#一、搭建NDK环镜" class="headerlink" title="一、搭建NDK环镜"></a>一、搭建NDK环镜</h3><ol>
-<li>新建一个空的android project，对着project点击右建，选择open Module Settings。SDK Location<br>选项下有Android NDK location:在点击下载(科学上网)
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/03/24/2016-03-24-android-studio-ndkpei-zhi/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/03/16/2016-03-16-lambdabiao-da-shi-de-shi-yong/" itemprop="url">
-                  lambda表达式的使用
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-16T22:55:33+08:00" content="2016-03-16">
-              2016-03-16
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/03/16/2016-03-16-lambdabiao-da-shi-de-shi-yong/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/16/2016-03-16-lambdabiao-da-shi-de-shi-yong/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/03/16/2016-03-16-lambdabiao-da-shi-de-shi-yong/" class="leancloud_visitors" data-flag-title="lambda表达式的使用">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>今天有同事问起lambda的用法，以前总是有点似懂非懂。重新看过资料后，发现明白了些。记录下心得，也分享给初学感觉困难的人。</p>
-<p>###什么是lambda表达式<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/03/16/2016-03-16-lambdabiao-da-shi-de-shi-yong/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1366,7 +1417,7 @@ No local packages or download links found for pil
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">51</span>
+              <span class="site-state-item-count">57</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
